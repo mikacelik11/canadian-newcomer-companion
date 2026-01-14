@@ -252,3 +252,119 @@
       flex-direction: column-reverse;
     }
   }
+
+  /* Purpose of Visit Page */
+.purpose-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.purpose-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.purpose-title {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.purpose-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+  margin-bottom: 3rem;
+}
+
+.purpose-card {
+  background-color: #333;
+  color: white;
+  padding: 2.5rem 2rem;
+  border: 3px solid #333;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.purpose-card:hover {
+  background-color: #555;
+  transform: translateY(-4px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+}
+
+.purpose-card.selected {
+  background-color: #d32f2f;
+  border-color: #d32f2f;
+  box-shadow: 0 6px 16px rgba(211, 47, 47, 0.5);
+}
+
+.purpose-card-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.purpose-card-description {
+  font-size: 1rem;
+  margin: 0;
+  opacity: 0.9;
+  line-height: 1.4;
+}
+
+/* Progress Info */
+.progress-info {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  max-width: 500px;
+}
+
+.progress-info p {
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.progress-info .next-step {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 2px solid #eee;
+  color: #d32f2f;
+  font-weight: 600;
+}
+
+/* Responsive - Purpose Cards */
+@media (max-width: 768px) {
+  .purpose-title {
+    font-size: 2rem;
+  }
+
+  .purpose-options {
+    grid-template-columns: 1fr;
+  }
+
+  .purpose-card {
+    min-height: 150px;
+    padding: 2rem 1.5rem;
+  }
+
+  .purpose-card-title {
+    font-size: 1.3rem;
+  }
+}
