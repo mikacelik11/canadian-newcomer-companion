@@ -1,19 +1,44 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Welcome from './components/Welcome';
+import LanguageSelection from './components/LanguageSelection';
 
 function App() {
+  const [currentStep, setCurrentStep] = useState('welcome');
+  const [selectedLanguage, setSelectedLanguage] = useState('');
+
+  const handleWelcomeNext = () => {
+    setCurrentStep('language');
+  };
+
+  const handleLanguageNext = (language) => {
+    setSelectedLanguage(language);
+    setCurrentStep('complete'); // We'll build more later
+  };
+
+  const handleLanguagePrevious = () => {
+    setCurrentStep('welcome');
+  };
+
   return (
     <div className="app">
-      <header className="app-header">
-        <h1>Canadian Newcomer Companion</h1>
-        <p>Version 1.0 - Initial Setup</p>
-      </header>
-      
-      <main className="app-main">
-        <section className="welcome-section">
-          <h2>Welcome! Bienvenu!</h2>
-          <p>A centralized digital platform to help you settle in Canada.</p>
-        </section>
-      </main>
+      {currentStep === 'welcome' && (
+        <Welcome onNext={handleWelcomeNext} />
+      )}
+
+      {currentStep === 'language' && (
+        <LanguageSelection 
+          onNext={handleLanguageNext}
+          onPrevious={handleLanguagePrevious}
+        />
+      )}
+
+      {currentStep === 'complete' && (
+        <div className="completion-message">
+          <h1>Setup Complete!</h1>
+          <p>Selected Language: {selectedLanguage}</p>
+          <p>More onboarding steps coming next...</p>
+        </div>
+      )}
     </div>
   );
 }
