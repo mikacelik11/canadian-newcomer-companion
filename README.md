@@ -27,7 +27,7 @@ This platform helps Canadian newcomers navigate essential settlement processes i
 
 ## 📚 Documentation
 
-This project is based on a comprehensive Requirements Specification Document (RSD) developed in Fall 2025.
+This project is based on a comprehensive Requirements Specification Document (RSD) developed in Fall 2024.
 
 ## 🚀 Development Progress
 
@@ -40,4 +40,3 @@ This project is based on a comprehensive Requirements Specification Document (RS
 ## 👤 Developer
 
 **Mikael** - Computer Science Student at University of Victoria
-
