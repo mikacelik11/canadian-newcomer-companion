@@ -564,3 +564,144 @@
     padding: 1.5rem;
   }
 }
+
+/* Indigenous Land Acknowledgement Page */
+.indigenous-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f9f9f9;
+}
+
+.indigenous-content {
+  flex: 1;
+  padding: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.indigenous-header-section {
+  background: white;
+  padding: 2.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  margin-bottom: 2rem;
+  border-left: 5px solid #d32f2f;
+}
+
+.indigenous-title {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.indigenous-intro {
+  font-size: 1.15rem;
+  color: #555;
+  line-height: 1.7;
+}
+
+.territory-info-box {
+  background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
+  color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 12px rgba(211, 47, 47, 0.3);
+}
+
+.territory-heading {
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.territory-description {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  opacity: 0.95;
+}
+
+.resources-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.resource-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  border-left: 4px solid #d32f2f;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.resource-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.resource-title {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 0.75rem;
+}
+
+.resource-description {
+  font-size: 1rem;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.resource-link {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background-color: #d32f2f;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.resource-link:hover {
+  background-color: #b71c1c;
+}
+
+.indigenous-footer-note {
+  background: #fff8e1;
+  border: 2px solid #ffd54f;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+}
+
+.indigenous-footer-note p {
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Responsive - Indigenous Page */
+@media (max-width: 768px) {
+  .indigenous-title {
+    font-size: 2rem;
+  }
+
+  .territory-heading {
+    font-size: 1.6rem;
+  }
+
+  .indigenous-header-section,
+  .resource-card {
+    padding: 1.5rem;
+  }
+
+  .resource-title {
+    font-size: 1.3rem;
+  }
+}

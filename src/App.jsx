@@ -4,6 +4,7 @@ import LanguageSelection from './components/LanguageSelection';
 import PurposeOfVisit from './components/PurposeOfVisit';
 import RegionSelection from './components/RegionSelection';
 import RegionDetail from './components/RegionDetail';
+import IndigenousAcknowledgement from './components/IndigenousAcknowledgement';
 
 function App() {
   const [currentStep, setCurrentStep] = useState('welcome');
@@ -45,11 +46,15 @@ function App() {
 
   const handleRegionDetailNext = (location) => {
     setSelectedLocation(location);
-    setCurrentStep('complete');
+    setCurrentStep('indigenous');
   };
 
   const handleRegionDetailPrevious = () => {
     setCurrentStep('region');
+  };
+
+  const handleIndigenousNext = () => {
+    setCurrentStep('dashboard');
   };
 
   return (
@@ -87,17 +92,25 @@ function App() {
         />
       )}
 
-      {currentStep === 'complete' && (
+      {currentStep === 'indigenous' && (
+        <IndigenousAcknowledgement
+          province={selectedProvince}
+          location={selectedLocation}
+          onNext={handleIndigenousNext}
+        />
+      )}
+
+      {currentStep === 'dashboard' && (
         <div className="completion-message">
-          <h1>✅ Onboarding Complete!</h1>
+          <h1>🎉 Welcome to Your Dashboard!</h1>
           <div className="progress-info">
-            <h2>Your Selections:</h2>
+            <h2>Your Profile:</h2>
             <p><strong>Language:</strong> {selectedLanguage}</p>
             <p><strong>Purpose:</strong> {selectedPurpose}</p>
             <p><strong>Province:</strong> {selectedProvince}</p>
             <p><strong>Location:</strong> {selectedLocation}</p>
             <p className="next-step">
-              Next steps: Dashboard, Checklist, and Indigenous Land Acknowledgement
+              Coming next: Personalized checklist, tasks, and resources for your region
             </p>
           </div>
         </div>
