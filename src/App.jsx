@@ -5,20 +5,23 @@ import PurposeOfVisit from './components/PurposeOfVisit';
 import RegionSelection from './components/RegionSelection';
 import RegionDetail from './components/RegionDetail';
 import IndigenousAcknowledgement from './components/IndigenousAcknowledgement';
+import Dashboard from './components/Dashboard';
 
 function App() {
   const [currentStep, setCurrentStep] = useState('welcome');
-  const [selectedLanguage, setSelectedLanguage] = useState('');
-  const [selectedPurpose, setSelectedPurpose] = useState('');
-  const [selectedProvince, setSelectedProvince] = useState('');
-  const [selectedLocation, setSelectedLocation] = useState('');
+  const [userProfile, setUserProfile] = useState({
+    language: '',
+    purpose: '',
+    province: '',
+    location: ''
+  });
 
   const handleWelcomeNext = () => {
     setCurrentStep('language');
   };
 
   const handleLanguageNext = (language) => {
-    setSelectedLanguage(language);
+    setUserProfile(prev => ({ ...prev, language }));
     setCurrentStep('purpose');
   };
 
@@ -27,7 +30,7 @@ function App() {
   };
 
   const handlePurposeNext = (purpose) => {
-    setSelectedPurpose(purpose);
+    setUserProfile(prev => ({ ...prev, purpose }));
     setCurrentStep('region');
   };
 
@@ -36,7 +39,7 @@ function App() {
   };
 
   const handleRegionNext = (province) => {
-    setSelectedProvince(province);
+    setUserProfile(prev => ({ ...prev, province }));
     setCurrentStep('regionDetail');
   };
 
@@ -45,7 +48,7 @@ function App() {
   };
 
   const handleRegionDetailNext = (location) => {
-    setSelectedLocation(location);
+    setUserProfile(prev => ({ ...prev, location }));
     setCurrentStep('indigenous');
   };
 
@@ -55,6 +58,15 @@ function App() {
 
   const handleIndigenousNext = () => {
     setCurrentStep('dashboard');
+  };
+
+  const handleNavigate = (page) => {
+    // For now, just show alerts - we'll build these pages next
+    if (page === 'home') {
+      setCurrentStep('dashboard');
+    } else {
+      alert(`${page} page coming soon!`);
+    }
   };
 
   return (
@@ -86,7 +98,7 @@ function App() {
 
       {currentStep === 'regionDetail' && (
         <RegionDetail
-          province={selectedProvince}
+          province={userProfile.province}
           onNext={handleRegionDetailNext}
           onPrevious={handleRegionDetailPrevious}
         />
@@ -94,26 +106,17 @@ function App() {
 
       {currentStep === 'indigenous' && (
         <IndigenousAcknowledgement
-          province={selectedProvince}
-          location={selectedLocation}
+          province={userProfile.province}
+          location={userProfile.location}
           onNext={handleIndigenousNext}
         />
       )}
 
       {currentStep === 'dashboard' && (
-        <div className="completion-message">
-          <h1>🎉 Welcome to Your Dashboard!</h1>
-          <div className="progress-info">
-            <h2>Your Profile:</h2>
-            <p><strong>Language:</strong> {selectedLanguage}</p>
-            <p><strong>Purpose:</strong> {selectedPurpose}</p>
-            <p><strong>Province:</strong> {selectedProvince}</p>
-            <p><strong>Location:</strong> {selectedLocation}</p>
-            <p className="next-step">
-              Coming next: Personalized checklist, tasks, and resources for your region
-            </p>
-          </div>
-        </div>
+        <Dashboard 
+          userProfile={userProfile}
+          onNavigate={handleNavigate}
+        />
       )}
     </div>
   );
