@@ -6,6 +6,7 @@ import RegionSelection from './components/RegionSelection';
 import RegionDetail from './components/RegionDetail';
 import IndigenousAcknowledgement from './components/IndigenousAcknowledgement';
 import Dashboard from './components/Dashboard';
+import Checklist from './components/Checklist';
 
 function App() {
   const [currentStep, setCurrentStep] = useState('welcome');
@@ -61,9 +62,12 @@ function App() {
   };
 
   const handleNavigate = (page) => {
-    // For now, just show alerts - we'll build these pages next
     if (page === 'home') {
       setCurrentStep('dashboard');
+    } else if (page === 'checklist') {
+      setCurrentStep('checklist');
+    } else if (page === 'land') {
+      setCurrentStep('indigenous');
     } else {
       alert(`${page} page coming soon!`);
     }
@@ -114,6 +118,13 @@ function App() {
 
       {currentStep === 'dashboard' && (
         <Dashboard 
+          userProfile={userProfile}
+          onNavigate={handleNavigate}
+        />
+      )}
+
+      {currentStep === 'checklist' && (
+        <Checklist
           userProfile={userProfile}
           onNavigate={handleNavigate}
         />
