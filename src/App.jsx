@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Welcome from './components/Welcome';
 import LanguageSelection from './components/LanguageSelection';
 import PurposeOfVisit from './components/PurposeOfVisit';
@@ -7,6 +7,12 @@ import RegionDetail from './components/RegionDetail';
 import IndigenousAcknowledgement from './components/IndigenousAcknowledgement';
 import Dashboard from './components/Dashboard';
 import Checklist from './components/Checklist';
+import { 
+  saveUserProfile, 
+  getUserProfile, 
+  setOnboardingComplete, 
+  isOnboardingComplete 
+} from './utils/storage';
 
 function App() {
   const [currentStep, setCurrentStep] = useState('welcome');
@@ -16,6 +22,25 @@ function App() {
     province: '',
     location: ''
   });
+
+  // Load saved data on mount
+  useEffect(() => {
+    const savedProfile = getUserProfile();
+    const onboardingDone = isOnboardingComplete();
+
+    if (savedProfile && onboardingDone) {
+      // User has completed onboarding before, go straight to dashboard
+      setUserProfile(savedProfile);
+      setCurrentStep('dashboard');
+    }
+  }, []);
+
+  // Save profile whenever it changes
+  useEffect(() => {
+    if (userProfile.language && userProfile.province && userProfile.location) {
+      saveUserProfile(userProfile);
+    }
+  }, [userProfile]);
 
   const handleWelcomeNext = () => {
     setCurrentStep('language');
@@ -58,6 +83,8 @@ function App() {
   };
 
   const handleIndigenousNext = () => {
+    // Mark onboarding as complete
+    setOnboardingComplete(true);
     setCurrentStep('dashboard');
   };
 

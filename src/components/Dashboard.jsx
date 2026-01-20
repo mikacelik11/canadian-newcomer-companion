@@ -1,5 +1,7 @@
 import React from 'react';
 import Navigation from './Navigation';
+import { clearAllData } from '../utils/storage';
+
 
 function Dashboard({ userProfile, onNavigate }) {
   const { language, purpose, province, location } = userProfile;
@@ -124,6 +126,18 @@ function Dashboard({ userProfile, onNavigate }) {
             </div>
             <button className="btn btn-secondary" onClick={() => onNavigate('settings')}>
               Change Settings
+            </button>
+            <button 
+              className="btn btn-warning" 
+              onClick={() => {
+                if (window.confirm('Are you sure? This will reset all your progress and preferences.')) {
+                  clearAllData();
+                  window.location.reload();
+                }
+              }}
+              style={{ marginTop: '0.5rem' }}
+            >
+              Reset All Progress
             </button>
           </div>
         </section>

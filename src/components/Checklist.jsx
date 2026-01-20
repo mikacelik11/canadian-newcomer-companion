@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navigation from './Navigation';
+import { saveTaskProgress, getTaskProgress } from '../utils/storage';
 
 function Checklist({ userProfile, onNavigate }) {
   const { province, location } = userProfile;
@@ -268,7 +269,21 @@ function Checklist({ userProfile, onNavigate }) {
     }
   ];
 
-  const [tasks, setTasks] = useState(allTasks);
+  const [tasks, setTasks] = useState(() => {
+    // Load saved progress on mount
+    const savedProgress = getTaskProgress();
+    
+    if (savedProgress) {
+      // Merge saved completion state with task data
+      return allTasks.map(task => {
+        const saved = savedProgress.find(p => p.id === task.id);
+        return saved ? { ...task, completed: saved.completed } : task;
+      });
+    }
+    
+    return allTasks;
+  });
+  
   const [expandedTask, setExpandedTask] = useState(null);
   const [filterCategory, setFilterCategory] = useState('all');
 
@@ -291,6 +306,10 @@ function Checklist({ userProfile, onNavigate }) {
   const completedCount = tasks.filter(task => task.completed).length;
   const totalCount = tasks.length;
   const progressPercentage = Math.round((completedCount / totalCount) * 100);
+
+  useEffect(() => {
+    saveTaskProgress(tasks);
+  }, [tasks]);
 
   return (
     <div className="checklist-container">
@@ -324,6 +343,7 @@ function Checklist({ userProfile, onNavigate }) {
             <div className="progress-bar-container">
               <div className="progress-bar" style={{ width: `${progressPercentage}%` }}></div>
             </div>
+            <p className="auto-save-indicator">💾 Progress automatically saved</p>
           </div>
         </header>
 

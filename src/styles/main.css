@@ -1358,3 +1358,20 @@
     width: 100%;
   }
 }
+
+/* Warning Button */
+.btn-warning {
+  background-color: #ff9800;
+  color: white;
+}
+
+.btn-warning:hover {
+  background-color: #f57c00;
+}
+
+.auto-save-indicator {
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+  color: #4caf50;
+  text-align: center;
+}
