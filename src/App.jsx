@@ -7,6 +7,7 @@ import RegionDetail from './components/RegionDetail';
 import IndigenousAcknowledgement from './components/IndigenousAcknowledgement';
 import Dashboard from './components/Dashboard';
 import Checklist from './components/Checklist';
+import Settings from './components/Settings';
 import { 
   saveUserProfile, 
   getUserProfile, 
@@ -29,7 +30,6 @@ function App() {
     const onboardingDone = isOnboardingComplete();
 
     if (savedProfile && onboardingDone) {
-      // User has completed onboarding before, go straight to dashboard
       setUserProfile(savedProfile);
       setCurrentStep('dashboard');
     }
@@ -83,9 +83,13 @@ function App() {
   };
 
   const handleIndigenousNext = () => {
-    // Mark onboarding as complete
     setOnboardingComplete(true);
     setCurrentStep('dashboard');
+  };
+
+  const handleUpdateProfile = (updatedProfile) => {
+    setUserProfile(updatedProfile);
+    saveUserProfile(updatedProfile);
   };
 
   const handleNavigate = (page) => {
@@ -95,6 +99,8 @@ function App() {
       setCurrentStep('checklist');
     } else if (page === 'land') {
       setCurrentStep('indigenous');
+    } else if (page === 'settings') {
+      setCurrentStep('settings');
     } else {
       alert(`${page} page coming soon!`);
     }
@@ -153,6 +159,14 @@ function App() {
       {currentStep === 'checklist' && (
         <Checklist
           userProfile={userProfile}
+          onNavigate={handleNavigate}
+        />
+      )}
+
+      {currentStep === 'settings' && (
+        <Settings
+          userProfile={userProfile}
+          onUpdateProfile={handleUpdateProfile}
           onNavigate={handleNavigate}
         />
       )}
