@@ -8,6 +8,7 @@ import IndigenousAcknowledgement from './components/IndigenousAcknowledgement';
 import Dashboard from './components/Dashboard';
 import Checklist from './components/Checklist';
 import Settings from './components/Settings';
+import Help from './components/Help';
 import { 
   saveUserProfile, 
   getUserProfile, 
@@ -101,6 +102,8 @@ function App() {
       setCurrentStep('indigenous');
     } else if (page === 'settings') {
       setCurrentStep('settings');
+    } else if (page === 'help') {
+      setCurrentStep('help');
     } else {
       alert(`${page} page coming soon!`);
     }
@@ -169,6 +172,10 @@ function App() {
           onUpdateProfile={handleUpdateProfile}
           onNavigate={handleNavigate}
         />
+      )}
+
+      {currentStep === 'help' && (
+        <Help onNavigate={handleNavigate} />
       )}
     </div>
   );
