@@ -5,7 +5,6 @@ function Navigation({ currentPage, onNavigate }) {
     { id: 'home', label: 'Home', icon: '🏠' },
     { id: 'checklist', label: 'Checklist', icon: '✓' },
     { id: 'land', label: 'Land Acknowledgement', icon: '🍁' },
-    { id: 'tasks', label: 'Tasks', icon: '📋' },
     { id: 'settings', label: 'Settings', icon: '⚙️' },
     { id: 'help', label: 'Help', icon: '❓' }
   ];
