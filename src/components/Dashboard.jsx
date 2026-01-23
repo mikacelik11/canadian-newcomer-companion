@@ -1,10 +1,20 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Navigation from './Navigation';
-import { clearAllData } from '../utils/storage';
+import { clearAllData, getTaskProgress } from '../utils/storage';
 
 
 function Dashboard({ userProfile, onNavigate }) {
   const { language, purpose, province, location } = userProfile;
+  const [completedCount, setCompletedCount] = useState(0);
+  const totalCount = 11; // Total tasks in checklist
+
+  useEffect(() => {
+    const taskProgress = getTaskProgress();
+    if (taskProgress) {
+      const completed = taskProgress.filter(task => task.completed).length;
+      setCompletedCount(completed);
+    }
+    }, []);
 
   const quickTasks = [
     {
@@ -104,14 +114,14 @@ function Dashboard({ userProfile, onNavigate }) {
           <div className="progress-card">
             <h2 className="section-title">Your Progress</h2>
             <div className="progress-stats">
-              <div className="stat-item">
-                <div className="stat-number">1/11</div>
-                <div className="stat-label">Complete</div>
-              </div>
-              <div className="progress-bar-container">
-                <div className="progress-bar" style={{ width: '9%' }}></div>
-              </div>
+          <div className="stat-item">
+            <div className="stat-number">{completedCount}/{totalCount}</div>
+              <div className="stat-label">Complete</div>
             </div>
+            <div className="progress-bar-container">
+          <div className="progress-bar" style={{ width: `${Math.round((completedCount / totalCount) * 100)}%` }}></div>
+          </div>
+        </div>
             <button className="btn btn-primary" onClick={() => onNavigate('checklist')}>
               View Full Checklist
             </button>

@@ -149,6 +149,7 @@ function App() {
           province={userProfile.province}
           location={userProfile.location}
           onNext={handleIndigenousNext}
+          onNavigate={handleNavigate}
         />
       )}
 

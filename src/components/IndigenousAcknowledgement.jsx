@@ -1,6 +1,7 @@
 import React from 'react';
+import Navigation from './Navigation';
 
-function IndigenousAcknowledgement({ province, location, onNext }) {
+function IndigenousAcknowledgement({ province, location, onNext, onNavigate }) {
   // Map provinces to Indigenous territories (simplified - you can expand this)
   const territoryInfo = {
     BC: {
@@ -92,6 +93,8 @@ function IndigenousAcknowledgement({ province, location, onNext }) {
         </div>
         <div className="canada-wordmark">Canada</div>
       </div>
+
+      <Navigation currentPage="land" onNavigate={onNavigate} />
 
       <div className="indigenous-content">
         <div className="indigenous-header-section">
