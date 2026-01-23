@@ -9,6 +9,7 @@ import Dashboard from './components/Dashboard';
 import Checklist from './components/Checklist';
 import Settings from './components/Settings';
 import Help from './components/Help';
+import CommunityResources from './components/CommunityResources';
 import { 
   saveUserProfile, 
   getUserProfile, 
@@ -104,6 +105,8 @@ function App() {
       setCurrentStep('settings');
     } else if (page === 'help') {
       setCurrentStep('help');
+    } else if (page === 'resources') {
+      setCurrentStep('resources');
     } else {
       alert(`${page} page coming soon!`);
     }
@@ -177,6 +180,13 @@ function App() {
 
       {currentStep === 'help' && (
         <Help onNavigate={handleNavigate} />
+      )}
+
+      {currentStep === 'resources' && (
+        <CommunityResources
+          userProfile={userProfile}
+          onNavigate={handleNavigate}
+        />
       )}
     </div>
   );

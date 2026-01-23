@@ -4,6 +4,7 @@ function Navigation({ currentPage, onNavigate }) {
   const navItems = [
     { id: 'home', label: 'Home', icon: '🏠' },
     { id: 'checklist', label: 'Checklist', icon: '✓' },
+    { id: 'resources', label: 'Resources', icon: '🏘️' },
     { id: 'land', label: 'Land Acknowledgement', icon: '🍁' },
     { id: 'settings', label: 'Settings', icon: '⚙️' },
     { id: 'help', label: 'Help', icon: '❓' }
