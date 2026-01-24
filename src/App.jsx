@@ -10,6 +10,8 @@ import Checklist from './components/Checklist';
 import Settings from './components/Settings';
 import Help from './components/Help';
 import CommunityResources from './components/CommunityResources';
+import Loading from './components/Loading';
+import PageTransition from './components/PageTransition';
 import { 
   saveUserProfile, 
   getUserProfile, 
@@ -19,6 +21,8 @@ import {
 
 function App() {
   const [currentStep, setCurrentStep] = useState('welcome');
+  const [isLoading, setIsLoading] = useState(true);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const [userProfile, setUserProfile] = useState({
     language: '',
     purpose: '',
@@ -28,13 +32,22 @@ function App() {
 
   // Load saved data on mount
   useEffect(() => {
-    const savedProfile = getUserProfile();
-    const onboardingDone = isOnboardingComplete();
+    const loadData = async () => {
+      // Simulate loading time for smooth experience
+      await new Promise(resolve => setTimeout(resolve, 800));
+      
+      const savedProfile = getUserProfile();
+      const onboardingDone = isOnboardingComplete();
 
-    if (savedProfile && onboardingDone) {
-      setUserProfile(savedProfile);
-      setCurrentStep('dashboard');
-    }
+      if (savedProfile && onboardingDone) {
+        setUserProfile(savedProfile);
+        setCurrentStep('dashboard');
+      }
+      
+      setIsLoading(false);
+    };
+
+    loadData();
   }, []);
 
   // Save profile whenever it changes
@@ -44,49 +57,59 @@ function App() {
     }
   }, [userProfile]);
 
+  // Handle page transitions
+  const transitionToStep = (newStep) => {
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setCurrentStep(newStep);
+      setIsTransitioning(false);
+      window.scrollTo(0, 0); // Scroll to top on page change
+    }, 300);
+  };
+
   const handleWelcomeNext = () => {
-    setCurrentStep('language');
+    transitionToStep('language');
   };
 
   const handleLanguageNext = (language) => {
     setUserProfile(prev => ({ ...prev, language }));
-    setCurrentStep('purpose');
+    transitionToStep('purpose');
   };
 
   const handleLanguagePrevious = () => {
-    setCurrentStep('welcome');
+    transitionToStep('welcome');
   };
 
   const handlePurposeNext = (purpose) => {
     setUserProfile(prev => ({ ...prev, purpose }));
-    setCurrentStep('region');
+    transitionToStep('region');
   };
 
   const handlePurposePrevious = () => {
-    setCurrentStep('language');
+    transitionToStep('language');
   };
 
   const handleRegionNext = (province) => {
     setUserProfile(prev => ({ ...prev, province }));
-    setCurrentStep('regionDetail');
+    transitionToStep('regionDetail');
   };
 
   const handleRegionPrevious = () => {
-    setCurrentStep('purpose');
+    transitionToStep('purpose');
   };
 
   const handleRegionDetailNext = (location) => {
     setUserProfile(prev => ({ ...prev, location }));
-    setCurrentStep('indigenous');
+    transitionToStep('indigenous');
   };
 
   const handleRegionDetailPrevious = () => {
-    setCurrentStep('region');
+    transitionToStep('region');
   };
 
   const handleIndigenousNext = () => {
     setOnboardingComplete(true);
-    setCurrentStep('dashboard');
+    transitionToStep('dashboard');
   };
 
   const handleUpdateProfile = (updatedProfile) => {
@@ -96,98 +119,105 @@ function App() {
 
   const handleNavigate = (page) => {
     if (page === 'home') {
-      setCurrentStep('dashboard');
+      transitionToStep('dashboard');
     } else if (page === 'checklist') {
-      setCurrentStep('checklist');
+      transitionToStep('checklist');
     } else if (page === 'land') {
-      setCurrentStep('indigenous');
+      transitionToStep('indigenous');
     } else if (page === 'settings') {
-      setCurrentStep('settings');
+      transitionToStep('settings');
     } else if (page === 'help') {
-      setCurrentStep('help');
+      transitionToStep('help');
     } else if (page === 'resources') {
-      setCurrentStep('resources');
+      transitionToStep('resources');
     } else {
       alert(`${page} page coming soon!`);
     }
   };
 
+  // Show loading screen on initial load
+  if (isLoading) {
+    return <Loading />;
+  }
+
   return (
-    <div className="app">
-      {currentStep === 'welcome' && (
-        <Welcome onNext={handleWelcomeNext} />
-      )}
+    <div className={`app ${isTransitioning ? 'transitioning' : ''}`}>
+      <PageTransition>
+        {currentStep === 'welcome' && (
+          <Welcome onNext={handleWelcomeNext} />
+        )}
 
-      {currentStep === 'language' && (
-        <LanguageSelection 
-          onNext={handleLanguageNext}
-          onPrevious={handleLanguagePrevious}
-        />
-      )}
+        {currentStep === 'language' && (
+          <LanguageSelection 
+            onNext={handleLanguageNext}
+            onPrevious={handleLanguagePrevious}
+          />
+        )}
 
-      {currentStep === 'purpose' && (
-        <PurposeOfVisit
-          onNext={handlePurposeNext}
-          onPrevious={handlePurposePrevious}
-        />
-      )}
+        {currentStep === 'purpose' && (
+          <PurposeOfVisit
+            onNext={handlePurposeNext}
+            onPrevious={handlePurposePrevious}
+          />
+        )}
 
-      {currentStep === 'region' && (
-        <RegionSelection
-          onNext={handleRegionNext}
-          onPrevious={handleRegionPrevious}
-        />
-      )}
+        {currentStep === 'region' && (
+          <RegionSelection
+            onNext={handleRegionNext}
+            onPrevious={handleRegionPrevious}
+          />
+        )}
 
-      {currentStep === 'regionDetail' && (
-        <RegionDetail
-          province={userProfile.province}
-          onNext={handleRegionDetailNext}
-          onPrevious={handleRegionDetailPrevious}
-        />
-      )}
+        {currentStep === 'regionDetail' && (
+          <RegionDetail
+            province={userProfile.province}
+            onNext={handleRegionDetailNext}
+            onPrevious={handleRegionDetailPrevious}
+          />
+        )}
 
-      {currentStep === 'indigenous' && (
-        <IndigenousAcknowledgement
-          province={userProfile.province}
-          location={userProfile.location}
-          onNext={handleIndigenousNext}
-          onNavigate={handleNavigate}
-        />
-      )}
+        {currentStep === 'indigenous' && (
+          <IndigenousAcknowledgement
+            province={userProfile.province}
+            location={userProfile.location}
+            onNext={handleIndigenousNext}
+            onNavigate={handleNavigate}
+          />
+        )}
 
-      {currentStep === 'dashboard' && (
-        <Dashboard 
-          userProfile={userProfile}
-          onNavigate={handleNavigate}
-        />
-      )}
+        {currentStep === 'dashboard' && (
+          <Dashboard 
+            userProfile={userProfile}
+            onNavigate={handleNavigate}
+          />
+        )}
 
-      {currentStep === 'checklist' && (
-        <Checklist
-          userProfile={userProfile}
-          onNavigate={handleNavigate}
-        />
-      )}
+        {currentStep === 'checklist' && (
+          <Checklist
+            userProfile={userProfile}
+            onNavigate={handleNavigate}
+          />
+        )}
 
-      {currentStep === 'settings' && (
-        <Settings
-          userProfile={userProfile}
-          onUpdateProfile={handleUpdateProfile}
-          onNavigate={handleNavigate}
-        />
-      )}
+        {currentStep === 'settings' && (
+          <Settings
+            userProfile={userProfile}
+            onUpdateProfile={handleUpdateProfile}
+            onNavigate={handleNavigate}
+          />
+        )}
 
-      {currentStep === 'help' && (
-        <Help onNavigate={handleNavigate} />
-      )}
+        {currentStep === 'help' && (
+          <Help onNavigate={handleNavigate} />
+        )}
 
-      {currentStep === 'resources' && (
-        <CommunityResources
-          userProfile={userProfile}
-          onNavigate={handleNavigate}
-        />
-      )}
+        {currentStep === 'resources' && (
+          <CommunityResources
+            userProfile={userProfile}
+            onNavigate={handleNavigate}
+          />
+        )}
+      </PageTransition>
     </div>
   );
 }

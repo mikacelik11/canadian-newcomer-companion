@@ -2246,3 +2246,376 @@
     padding: 1.5rem;
   }
 }
+
+/* ============================================
+   LOADING SCREEN
+   ============================================ */
+
+   .loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+  }
+  
+  .loading-content {
+    text-align: center;
+    color: white;
+  }
+  
+  .canada-flag-spinner {
+    font-size: 4rem;
+    animation: spin 2s linear infinite;
+    margin-bottom: 1rem;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  .loading-text {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    font-weight: 300;
+  }
+  
+  .loading-bar {
+    width: 200px;
+    height: 4px;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 2px;
+    overflow: hidden;
+    margin: 0 auto;
+  }
+  
+  .loading-bar-fill {
+    height: 100%;
+    background-color: white;
+    animation: loadingBar 1.5s ease-in-out infinite;
+  }
+  
+  @keyframes loadingBar {
+    0% {
+      width: 0%;
+      margin-left: 0;
+    }
+    50% {
+      width: 100%;
+      margin-left: 0;
+    }
+    100% {
+      width: 0%;
+      margin-left: 100%;
+    }
+  }
+  
+  /* ============================================
+     PAGE TRANSITIONS
+     ============================================ */
+  
+  .page-transition {
+    animation: fadeIn 0.3s ease-in-out;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .app.transitioning .page-transition {
+    animation: fadeOut 0.3s ease-in-out;
+  }
+  
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+  }
+  
+  /* ============================================
+     MOBILE OPTIMIZATIONS
+     ============================================ */
+  
+  /* Better touch targets */
+  @media (max-width: 768px) {
+    button,
+    .btn,
+    .nav-item,
+    a {
+      min-height: 44px; /* iOS minimum touch target */
+      min-width: 44px;
+    }
+  
+    /* Larger tap targets for navigation */
+    .nav-item {
+      padding: 1rem;
+    }
+  
+    /* Better spacing on mobile */
+    .dashboard-content,
+    .checklist-content,
+    .settings-content,
+    .help-content,
+    .resources-content {
+      padding: 1rem;
+    }
+  
+    /* Reduce font sizes slightly on small screens */
+    .dashboard-title,
+    .checklist-title,
+    .settings-title,
+    .help-title,
+    .resources-title {
+      font-size: 1.75rem;
+    }
+  
+    /* Stack navigation items on very small screens */
+    @media (max-width: 480px) {
+      .nav-label {
+        display: none;
+      }
+  
+      .nav-item {
+        padding: 0.75rem 0.5rem;
+      }
+    }
+  }
+  
+  /* Improve scrolling on iOS */
+  body {
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Prevent zoom on input focus (iOS) */
+  @media (max-width: 768px) {
+    input,
+    select,
+    textarea {
+      font-size: 16px !important; /* Prevents iOS zoom */
+    }
+  }
+  
+  /* ============================================
+     SMOOTH SCROLLING
+     ============================================ */
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  /* ============================================
+     ENHANCED BUTTON INTERACTIONS
+     ============================================ */
+  
+  .btn,
+  button {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+    user-select: none;
+    touch-action: manipulation;
+  }
+  
+  .btn:active,
+  button:active {
+    transform: scale(0.98);
+  }
+  
+  /* ============================================
+     ACCESSIBILITY IMPROVEMENTS
+     ============================================ */
+  
+  /* Focus indicators for keyboard navigation */
+  button:focus-visible,
+  a:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    outline: 3px solid #d32f2f;
+    outline-offset: 2px;
+  }
+  
+  /* Skip to main content link */
+  .skip-to-main {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: #d32f2f;
+    color: white;
+    padding: 8px;
+    text-decoration: none;
+    z-index: 100;
+  }
+  
+  .skip-to-main:focus {
+    top: 0;
+  }
+  
+  /* ============================================
+     SAFE AREA INSETS (for notched devices)
+     ============================================ */
+  
+  @supports (padding: max(0px)) {
+    .government-header {
+      padding-left: max(1rem, env(safe-area-inset-left));
+      padding-right: max(1rem, env(safe-area-inset-right));
+    }
+  
+    .main-navigation {
+      padding-left: max(0px, env(safe-area-inset-left));
+      padding-right: max(0px, env(safe-area-inset-right));
+    }
+  }
+  
+  /* ============================================
+     PULL-TO-REFRESH PREVENTION
+     ============================================ */
+  
+  body {
+    overscroll-behavior-y: contain;
+  }
+  
+  /* ============================================
+     REDUCED MOTION
+     ============================================ */
+  
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+  
+  /* ============================================
+     LOADING STATES FOR COMPONENTS
+     ============================================ */
+  
+  .loading-spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 1s linear infinite;
+  }
+  
+  .loading-spinner.dark {
+    border: 3px solid rgba(0, 0, 0, 0.1);
+    border-top-color: #d32f2f;
+  }
+  
+  /* ============================================
+     OFFLINE INDICATOR
+     ============================================ */
+  
+  .offline-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #ff9800;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    z-index: 1000;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+  }
+  
+  .offline-banner.show {
+    transform: translateY(0);
+  }
+  
+  /* ============================================
+     MOBILE-SPECIFIC IMPROVEMENTS
+     ============================================ */
+  
+  /* Prevent text selection on buttons and interactive elements */
+  .btn,
+  .nav-item,
+  .task-card,
+  .resource-item,
+  .faq-question,
+  .quick-link-card {
+    -webkit-user-select: none;
+    user-select: none;
+  }
+  
+  /* Improve tap highlight color */
+  * {
+    -webkit-tap-highlight-color: rgba(211, 47, 47, 0.1);
+  }
+  
+  /* Better mobile table/grid layouts */
+  @media (max-width: 768px) {
+    .tasks-grid,
+    .services-grid,
+    .contact-grid,
+    .resources-grid {
+      grid-template-columns: 1fr;
+    }
+  
+    /* Improve form layouts on mobile */
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+  
+    /* Stack filter buttons vertically */
+    .filter-buttons,
+    .category-filters {
+      flex-direction: column;
+    }
+  
+    .filter-btn,
+    .category-btn {
+      width: 100%;
+    }
+  
+    /* Improve modal/card spacing */
+    .setting-card,
+    .resource-item,
+    .task-card {
+      margin-bottom: 1rem;
+    }
+  }
+  
+  /* ============================================
+     PRINT STYLES (bonus)
+     ============================================ */
+  
+  @media print {
+    .main-navigation,
+    .government-header,
+    button,
+    .btn {
+      display: none !important;
+    }
+  
+    body {
+      background: white;
+    }
+  
+    * {
+      box-shadow: none !important;
+    }
+  }
