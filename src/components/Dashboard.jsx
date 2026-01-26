@@ -14,43 +14,145 @@ function Dashboard({ userProfile, onNavigate }) {
       const completed = taskProgress.filter(task => task.completed).length;
       setCompletedCount(completed);
     }
-    }, []);
-
-  const quickTasks = [
-    {
-      id: 1,
-      title: 'Get BC Services Card',
-      description: 'Apply for your health care card. Required for accessing healthcare services.',
-      status: 'not-started',
-      category: 'Identification'
-    },
-    {
-      id: 2,
-      title: 'Apply for SIN',
-      description: 'Social Insurance Number. What you need: Work Permit, Study Permit, or Proof of Address.',
-      status: 'not-started',
-      category: 'Identification'
-    },
-    {
-      id: 3,
-      title: 'Open a Bank Account',
-      description: 'Set up your Canadian bank account. Bring: Passport, Study Permit, Proof of Address.',
-      status: 'not-started',
-      category: 'Banking'
-    },
-    {
-      id: 4,
-      title: 'Get ICBC Driver\'s License',
-      description: 'Apply for a BC driver\'s license. ICBC Office: Visit Hillside Ave or Douglas St.',
-      status: 'not-started',
-      category: 'Transportation'
-    }
-  ];
+  }, []);
+  
+  // GET PROVINCE-SPECIFIC TASKS - ADD THIS FUNCTION HERE
+  const getQuickTasks = () => {
+    const provinceTasks = {
+      BC: [
+        {
+          id: 1,
+          title: 'Get BC Services Card',
+          description: 'Apply for your health care card. Required for accessing healthcare services.',
+          status: 'not-started',
+          category: 'Identification'
+        },
+        {
+          id: 2,
+          title: 'Apply for SIN',
+          description: 'Social Insurance Number. What you need: Work Permit, Study Permit, or Proof of Address.',
+          status: 'not-started',
+          category: 'Identification'
+        },
+        {
+          id: 3,
+          title: 'Open a Bank Account',
+          description: 'Set up your Canadian bank account. Bring: Passport, Study Permit, Proof of Address.',
+          status: 'not-started',
+          category: 'Banking'
+        },
+        {
+          id: 4,
+          title: 'Get ICBC Driver\'s License',
+          description: 'Apply for a BC driver\'s license. ICBC Office: Visit Hillside Ave or Douglas St.',
+          status: 'not-started',
+          category: 'Transportation'
+        }
+      ],
+      ON: [
+        {
+          id: 1,
+          title: 'Get Ontario Health Card (OHIP)',
+          description: 'Apply for your Ontario Health Insurance Plan card for healthcare coverage.',
+          status: 'not-started',
+          category: 'Identification'
+        },
+        {
+          id: 2,
+          title: 'Apply for SIN',
+          description: 'Social Insurance Number needed for working and accessing benefits.',
+          status: 'not-started',
+          category: 'Identification'
+        },
+        {
+          id: 3,
+          title: 'Open a Bank Account',
+          description: 'Set up your Canadian bank account at major banks like TD, RBC, or Scotiabank.',
+          status: 'not-started',
+          category: 'Banking'
+        },
+        {
+          id: 4,
+          title: 'Get Ontario Driver\'s License',
+          description: 'Apply at ServiceOntario. May need to complete G1, G2 road tests.',
+          status: 'not-started',
+          category: 'Transportation'
+        }
+      ],
+      AB: [
+        {
+          id: 1,
+          title: 'Get Alberta Health Care Card',
+          description: 'Register for Alberta Health Care Insurance Plan (AHCIP).',
+          status: 'not-started',
+          category: 'Identification'
+        },
+        {
+          id: 2,
+          title: 'Apply for SIN',
+          description: 'Social Insurance Number from Service Canada office.',
+          status: 'not-started',
+          category: 'Identification'
+        },
+        {
+          id: 3,
+          title: 'Open a Bank Account',
+          description: 'Set up banking at ATB Financial, TD, or other Canadian banks.',
+          status: 'not-started',
+          category: 'Banking'
+        },
+        {
+          id: 4,
+          title: 'Get Alberta Driver\'s License',
+          description: 'Apply at Alberta Registry. Exchange foreign license or take knowledge/road tests.',
+          status: 'not-started',
+          category: 'Transportation'
+        }
+      ],
+      QC: [
+        {
+          id: 1,
+          title: 'Get Quebec Health Insurance Card',
+          description: 'Apply for RAMQ (Régie de l\'assurance maladie du Québec) card.',
+          status: 'not-started',
+          category: 'Identification'
+        },
+        {
+          id: 2,
+          title: 'Apply for SIN',
+          description: 'Social Insurance Number from Service Canada.',
+          status: 'not-started',
+          category: 'Identification'
+        },
+        {
+          id: 3,
+          title: 'Open a Bank Account',
+          description: 'Open account at Desjardins, National Bank, or other Canadian banks.',
+          status: 'not-started',
+          category: 'Banking'
+        },
+        {
+          id: 4,
+          title: 'Get Quebec Driver\'s License',
+          description: 'Apply at SAAQ. May need French language exam. Exchange or take tests.',
+          status: 'not-started',
+          category: 'Transportation'
+        }
+      ]
+    };
+  
+    // Return province-specific tasks or default to BC tasks
+    return provinceTasks[province] || provinceTasks.BC;
+  };
+  
+  // CALL THE FUNCTION TO GET TASKS - REPLACE OLD const quickTasks = [...] WITH THIS
+  const quickTasks = getQuickTasks();
+  
 
   const helpfulServices = [
     {
-      title: 'Healthcare Service Plan',
-      description: 'Register for BC\'s Medical Services Plan (MSP)',
+      title: 'Healthcare Registration',
+      description: `Register for ${province}'s healthcare plan`,
       link: '#'
     },
     {
@@ -59,8 +161,8 @@ function Dashboard({ userProfile, onNavigate }) {
       link: '#'
     },
     {
-      title: 'Public Transit Passes',
-      description: 'Get your BC Transit pass for Victoria',
+      title: 'Public Transit Information',
+      description: `Get transit passes and routes for ${location}`,
       link: '#'
     },
     {

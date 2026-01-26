@@ -193,6 +193,123 @@ function CommunityResources({ userProfile, onNavigate }) {
         phone: '1-866-461-3222',
         website: 'https://www.canada.ca/en/financial-consumer-agency.html',
         address: 'Online and phone services'
+      },
+
+        // Ontario Resources
+      {
+        id: 17,
+        category: 'Settlement Services',
+        name: 'COSTI Immigrant Services',
+        province: 'ON',
+        description: 'Comprehensive settlement and integration services for newcomers in the Greater Toronto Area.',
+        services: ['Settlement Support', 'Language Classes', 'Employment Help', 'Youth Programs'],
+        phone: '416-658-1600',
+        email: 'info@costi.org',
+      website: 'https://www.costi.org/',
+      address: '1710 Dufferin Street, Toronto, ON'
+      },
+      {
+        id: 18,
+        category: 'Settlement Services',
+        name: 'Ottawa Community Immigrant Services Organization (OCISO)',
+        province: 'ON',
+        description: 'Settlement services, language training, and employment support in Ottawa.',
+        services: ['Newcomer Services', 'Language Training', 'Job Search', 'Family Support'],
+        phone: '613-725-5671',
+        website: 'https://www.ociso.org/',
+        address: '959 Wellington Street West, Ottawa, ON'
+      },
+      {
+      id: 19,
+      category: 'Employment Services',
+      name: 'Ontario Employment Services',
+      province: 'ON',
+      description: 'Free employment services including job search, career planning, and skills training.',
+      services: ['Job Search', 'Career Counselling', 'Skills Training', 'Resume Help'],
+      phone: '1-800-387-5656',
+      website: 'https://www.ontario.ca/page/employment-ontario',
+      address: 'Multiple locations across Ontario'
+    },
+    {
+      id: 20,
+      category: 'Healthcare',
+      name: 'Ontario Telehealth',
+      province: 'ON',
+      description: '24/7 health advice from registered nurses.',
+      services: ['Health Advice', 'Symptom Guidance', 'Find Services'],
+      phone: '1-866-797-0000',
+      website: 'https://www.ontario.ca/page/get-medical-advice-telehealth-ontario',
+      address: 'Phone and online services'
+    },
+
+    // Alberta Resources
+    {
+      id: 21,
+      category: 'Settlement Services',
+      name: 'Calgary Immigrant Women\'s Association (CIWA)',
+      province: 'AB',
+      description: 'Comprehensive services for immigrant women and families in Calgary.',
+      services: ['Settlement Support', 'Language Programs', 'Employment Services', 'Childcare'],
+      phone: '403-263-4414',
+      website: 'https://www.ciwa-online.com/',
+      address: '200-138 4th Avenue SE, Calgary, AB'
+    },
+    {
+      id: 22,
+      category: 'Settlement Services',
+      name: 'Edmonton Mennonite Centre for Newcomers',
+      province: 'AB',
+      description: 'Settlement, language, and employment services for Edmonton newcomers.',
+      services: ['Settlement Help', 'Language Classes', 'Job Preparation', 'Youth Programs'],
+      phone: '780-424-7709',
+      website: 'https://www.emcn.ab.ca/',
+      address: '10010 107A Avenue, Edmonton, AB'
+    },
+    {
+      id: 23,
+      category: 'Healthcare',
+      name: 'Alberta Health Link',
+      province: 'AB',
+      description: '24/7 health advice and information from nurses.',
+      services: ['Health Advice', 'Find Services', 'Prescription Help'],
+      phone: '811',
+      website: 'https://www.albertahealthservices.ca/assets/healthinfo/link/index.html',
+      address: 'Phone and online services'
+    },
+
+    // Quebec Resources
+    {
+      id: 24,
+      category: 'Settlement Services',
+      name: 'TCRI (Table de concertation des organismes au service des personnes réfugiées et immigrantes)',
+      province: 'QC',
+      description: 'Network of organizations serving refugees and immigrants in Montreal.',
+      services: ['Settlement Services', 'French Classes', 'Employment Support', 'Community Programs'],
+      phone: '514-272-2953',
+      website: 'https://tcri.qc.ca/',
+      address: '5350 Boulevard Saint-Laurent, Montreal, QC'
+    },
+    {
+      id: 25,
+      category: 'Language Training',
+      name: 'Francisation Quebec',
+      province: 'QC',
+      description: 'Free French language courses for immigrants in Quebec.',
+      services: ['French Classes', 'Online Learning', 'Childcare Support', 'Part-time & Full-time'],
+      phone: '1-877-864-9191',
+      website: 'https://www.quebec.ca/en/education/learn-french',
+      address: 'Multiple locations across Quebec'
+      },
+      {
+        id: 26,
+        category: 'Employment Services',
+        name: 'Emploi-Québec',
+        province: 'QC',
+        description: 'Employment services and job search support across Quebec.',
+        services: ['Job Search', 'Career Counselling', 'Training Programs', 'Financial Support'],
+        phone: '1-877-767-8773',
+        website: 'https://www.quebec.ca/en/employment/employment-assistance-and-support-measures',
+        address: 'Multiple Service Canada offices in Quebec'
       }
     ];
 
