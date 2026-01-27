@@ -36,13 +36,10 @@ function PurposeOfVisit({ onNext, onPrevious }) {
       <div className="government-header">
         <div className="canada-flag">🍁</div>
         <div className="government-text">
-          <span>Government</span>
-          <span>Gouvernement</span>
+          <span>Welcome to Canada</span>
+          <span>Bienvenue au Canada</span>
         </div>
-        <div className="government-text">
-          <span>of Canada</span>
-          <span>du Canada</span>
-        </div>
+    
         <div className="canada-wordmark">Canada</div>
       </div>
 
