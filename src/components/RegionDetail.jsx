@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'; // import 
 
 function RegionDetail({ province, onNext, onPrevious }) {
   const [searchTerm, setSearchTerm] = useState('');
