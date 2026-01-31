@@ -22,7 +22,7 @@ function RegionDetail({ province, onNext, onPrevious }) {
       'Hamilton',
       'London'
     ],
-    // Add more provinces as needed
+    // More provinces coming soon
   };
 
   const currentLocations = locations[province] || ['Location data coming soon...'];
