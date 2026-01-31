@@ -17,133 +17,404 @@ function Dashboard({ userProfile, onNavigate }) {
   }, []);
   
   // GET PROVINCE-SPECIFIC TASKS - ADD THIS FUNCTION HERE
-  const getQuickTasks = () => {
-    const provinceTasks = {
-      BC: [
-        {
-          id: 1,
-          title: 'Get BC Services Card',
-          description: 'Apply for your health care card. Required for accessing healthcare services.',
-          status: 'not-started',
-          category: 'Identification'
-        },
-        {
-          id: 2,
-          title: 'Apply for SIN',
-          description: 'Social Insurance Number. What you need: Work Permit, Study Permit, or Proof of Address.',
-          status: 'not-started',
-          category: 'Identification'
-        },
-        {
-          id: 3,
-          title: 'Open a Bank Account',
-          description: 'Set up your Canadian bank account. Bring: Passport, Study Permit, Proof of Address.',
-          status: 'not-started',
-          category: 'Banking'
-        },
-        {
-          id: 4,
-          title: 'Get ICBC Driver\'s License',
-          description: 'Apply for a BC driver\'s license. ICBC Office: Visit Hillside Ave or Douglas St.',
-          status: 'not-started',
-          category: 'Transportation'
-        }
-      ],
-      ON: [
-        {
-          id: 1,
-          title: 'Get Ontario Health Card (OHIP)',
-          description: 'Apply for your Ontario Health Insurance Plan card for healthcare coverage.',
-          status: 'not-started',
-          category: 'Identification'
-        },
-        {
-          id: 2,
-          title: 'Apply for SIN',
-          description: 'Social Insurance Number needed for working and accessing benefits.',
-          status: 'not-started',
-          category: 'Identification'
-        },
-        {
-          id: 3,
-          title: 'Open a Bank Account',
-          description: 'Set up your Canadian bank account at major banks like TD, RBC, or Scotiabank.',
-          status: 'not-started',
-          category: 'Banking'
-        },
-        {
-          id: 4,
-          title: 'Get Ontario Driver\'s License',
-          description: 'Apply at ServiceOntario. May need to complete G1, G2 road tests.',
-          status: 'not-started',
-          category: 'Transportation'
-        }
-      ],
-      AB: [
-        {
-          id: 1,
-          title: 'Get Alberta Health Care Card',
-          description: 'Register for Alberta Health Care Insurance Plan (AHCIP).',
-          status: 'not-started',
-          category: 'Identification'
-        },
-        {
-          id: 2,
-          title: 'Apply for SIN',
-          description: 'Social Insurance Number from Service Canada office.',
-          status: 'not-started',
-          category: 'Identification'
-        },
-        {
-          id: 3,
-          title: 'Open a Bank Account',
-          description: 'Set up banking at ATB Financial, TD, or other Canadian banks.',
-          status: 'not-started',
-          category: 'Banking'
-        },
-        {
-          id: 4,
-          title: 'Get Alberta Driver\'s License',
-          description: 'Apply at Alberta Registry. Exchange foreign license or take knowledge/road tests.',
-          status: 'not-started',
-          category: 'Transportation'
-        }
-      ],
-      QC: [
-        {
-          id: 1,
-          title: 'Get Quebec Health Insurance Card',
-          description: 'Apply for RAMQ (Régie de l\'assurance maladie du Québec) card.',
-          status: 'not-started',
-          category: 'Identification'
-        },
-        {
-          id: 2,
-          title: 'Apply for SIN',
-          description: 'Social Insurance Number from Service Canada.',
-          status: 'not-started',
-          category: 'Identification'
-        },
-        {
-          id: 3,
-          title: 'Open a Bank Account',
-          description: 'Open account at Desjardins, National Bank, or other Canadian banks.',
-          status: 'not-started',
-          category: 'Banking'
-        },
-        {
-          id: 4,
-          title: 'Get Quebec Driver\'s License',
-          description: 'Apply at SAAQ. May need French language exam. Exchange or take tests.',
-          status: 'not-started',
-          category: 'Transportation'
-        }
-      ]
-    };
-  
-    // Return province-specific tasks or default to BC tasks
-    return provinceTasks[province] || provinceTasks.BC;
+  // Get province-specific tasks
+const getQuickTasks = () => {
+  const provinceTasks = {
+    BC: [
+      {
+        id: 1,
+        title: 'Get BC Services Card',
+        description: 'Apply for your health care card. Required for accessing healthcare services.',
+        status: 'not-started',
+        category: 'Identification'
+      },
+      {
+        id: 2,
+        title: 'Apply for SIN',
+        description: 'Social Insurance Number. What you need: Work Permit, Study Permit, or Proof of Address.',
+        status: 'not-started',
+        category: 'Identification'
+      },
+      {
+        id: 3,
+        title: 'Open a Bank Account',
+        description: 'Set up your Canadian bank account. Bring: Passport, Study Permit, Proof of Address.',
+        status: 'not-started',
+        category: 'Banking'
+      },
+      {
+        id: 4,
+        title: 'Get ICBC Driver\'s License',
+        description: 'Apply for a BC driver\'s license. ICBC handles all licensing in BC.',
+        status: 'not-started',
+        category: 'Transportation'
+      }
+    ],
+    ON: [
+      {
+        id: 1,
+        title: 'Get Ontario Health Card (OHIP)',
+        description: 'Apply for your Ontario Health Insurance Plan card for healthcare coverage.',
+        status: 'not-started',
+        category: 'Identification'
+      },
+      {
+        id: 2,
+        title: 'Apply for SIN',
+        description: 'Social Insurance Number needed for working and accessing benefits.',
+        status: 'not-started',
+        category: 'Identification'
+      },
+      {
+        id: 3,
+        title: 'Open a Bank Account',
+        description: 'Set up your Canadian bank account at major banks like TD, RBC, or Scotiabank.',
+        status: 'not-started',
+        category: 'Banking'
+      },
+      {
+        id: 4,
+        title: 'Get Ontario Driver\'s License',
+        description: 'Apply at ServiceOntario. May need to complete G1, G2 road tests.',
+        status: 'not-started',
+        category: 'Transportation'
+      }
+    ],
+    AB: [
+      {
+        id: 1,
+        title: 'Get Alberta Health Care Card',
+        description: 'Register for Alberta Health Care Insurance Plan (AHCIP).',
+        status: 'not-started',
+        category: 'Identification'
+      },
+      {
+        id: 2,
+        title: 'Apply for SIN',
+        description: 'Social Insurance Number from Service Canada office.',
+        status: 'not-started',
+        category: 'Identification'
+      },
+      {
+        id: 3,
+        title: 'Open a Bank Account',
+        description: 'Set up banking at ATB Financial, TD, or other Canadian banks.',
+        status: 'not-started',
+        category: 'Banking'
+      },
+      {
+        id: 4,
+        title: 'Get Alberta Driver\'s License',
+        description: 'Apply at Alberta Registry. Exchange foreign license or take knowledge/road tests.',
+        status: 'not-started',
+        category: 'Transportation'
+      }
+    ],
+    QC: [
+      {
+        id: 1,
+        title: 'Get Quebec Health Insurance Card',
+        description: 'Apply for RAMQ (Régie de l\'assurance maladie du Québec) card.',
+        status: 'not-started',
+        category: 'Identification'
+      },
+      {
+        id: 2,
+        title: 'Apply for SIN',
+        description: 'Social Insurance Number from Service Canada.',
+        status: 'not-started',
+        category: 'Identification'
+      },
+      {
+        id: 3,
+        title: 'Open a Bank Account',
+        description: 'Open account at Desjardins, National Bank, or other Canadian banks.',
+        status: 'not-started',
+        category: 'Banking'
+      },
+      {
+        id: 4,
+        title: 'Get Quebec Driver\'s License',
+        description: 'Apply at SAAQ. May need French language exam. Exchange or take tests.',
+        status: 'not-started',
+        category: 'Transportation'
+      }
+    ],
+    SK: [
+      {
+        id: 1,
+        title: 'Get Saskatchewan Health Card',
+        description: 'Apply for Saskatchewan Health Services card for healthcare coverage.',
+        status: 'not-started',
+        category: 'Identification'
+      },
+      {
+        id: 2,
+        title: 'Apply for SIN',
+        description: 'Social Insurance Number from Service Canada.',
+        status: 'not-started',
+        category: 'Identification'
+      },
+      {
+        id: 3,
+        title: 'Open a Bank Account',
+        description: 'Set up banking at major Canadian banks.',
+        status: 'not-started',
+        category: 'Banking'
+      },
+      {
+        id: 4,
+        title: 'Get Saskatchewan Driver\'s License',
+        description: 'Apply at SGI Motor License Issuer. Exchange or take tests.',
+        status: 'not-started',
+        category: 'Transportation'
+      }
+    ],
+    MB: [
+      {
+        id: 1,
+        title: 'Get Manitoba Health Card',
+        description: 'Apply for Manitoba Health card for healthcare coverage.',
+        status: 'not-started',
+        category: 'Identification'
+      },
+      {
+        id: 2,
+        title: 'Apply for SIN',
+        description: 'Social Insurance Number from Service Canada.',
+        status: 'not-started',
+        category: 'Identification'
+      },
+      {
+        id: 3,
+        title: 'Open a Bank Account',
+        description: 'Set up banking at major Canadian banks.',
+        status: 'not-started',
+        category: 'Banking'
+      },
+      {
+        id: 4,
+        title: 'Get Manitoba Driver\'s License',
+        description: 'Apply at Manitoba Public Insurance. Exchange or take tests.',
+        status: 'not-started',
+        category: 'Transportation'
+      }
+    ],
+    NB: [
+      {
+        id: 1,
+        title: 'Get New Brunswick Medicare Card',
+        description: 'Apply for NB Medicare card for healthcare coverage.',
+        status: 'not-started',
+        category: 'Identification'
+      },
+      {
+        id: 2,
+        title: 'Apply for SIN',
+        description: 'Social Insurance Number from Service Canada.',
+        status: 'not-started',
+        category: 'Identification'
+      },
+      {
+        id: 3,
+        title: 'Open a Bank Account',
+        description: 'Set up banking at major Canadian banks.',
+        status: 'not-started',
+        category: 'Banking'
+      },
+      {
+        id: 4,
+        title: 'Get New Brunswick Driver\'s License',
+        description: 'Apply at Service New Brunswick. Exchange or take tests.',
+        status: 'not-started',
+        category: 'Transportation'
+      }
+    ],
+    NS: [
+      {
+        id: 1,
+        title: 'Get Nova Scotia Health Card',
+        description: 'Apply for NS MSI (Medical Services Insurance) card.',
+        status: 'not-started',
+        category: 'Identification'
+      },
+      {
+        id: 2,
+        title: 'Apply for SIN',
+        description: 'Social Insurance Number from Service Canada.',
+        status: 'not-started',
+        category: 'Identification'
+      },
+      {
+        id: 3,
+        title: 'Open a Bank Account',
+        description: 'Set up banking at major Canadian banks.',
+        status: 'not-started',
+        category: 'Banking'
+      },
+      {
+        id: 4,
+        title: 'Get Nova Scotia Driver\'s License',
+        description: 'Apply at Access Nova Scotia. Exchange or take tests.',
+        status: 'not-started',
+        category: 'Transportation'
+      }
+    ],
+    PE: [
+      {
+        id: 1,
+        title: 'Get PEI Health Card',
+        description: 'Apply for Prince Edward Island Health Card.',
+        status: 'not-started',
+        category: 'Identification'
+      },
+      {
+        id: 2,
+        title: 'Apply for SIN',
+        description: 'Social Insurance Number from Service Canada.',
+        status: 'not-started',
+        category: 'Identification'
+      },
+      {
+        id: 3,
+        title: 'Open a Bank Account',
+        description: 'Set up banking at major Canadian banks.',
+        status: 'not-started',
+        category: 'Banking'
+      },
+      {
+        id: 4,
+        title: 'Get PEI Driver\'s License',
+        description: 'Apply at Access PEI. Exchange or take tests.',
+        status: 'not-started',
+        category: 'Transportation'
+      }
+    ],
+    NL: [
+      {
+        id: 1,
+        title: 'Get Newfoundland and Labrador MCP Card',
+        description: 'Apply for Medical Care Plan (MCP) card.',
+        status: 'not-started',
+        category: 'Identification'
+      },
+      {
+        id: 2,
+        title: 'Apply for SIN',
+        description: 'Social Insurance Number from Service Canada.',
+        status: 'not-started',
+        category: 'Identification'
+      },
+      {
+        id: 3,
+        title: 'Open a Bank Account',
+        description: 'Set up banking at major Canadian banks.',
+        status: 'not-started',
+        category: 'Banking'
+      },
+      {
+        id: 4,
+        title: 'Get NL Driver\'s License',
+        description: 'Apply at Motor Registration. Exchange or take tests.',
+        status: 'not-started',
+        category: 'Transportation'
+      }
+    ],
+    YT: [
+      {
+        id: 1,
+        title: 'Get Yukon Health Care Card',
+        description: 'Apply for Yukon Health Insurance card.',
+        status: 'not-started',
+        category: 'Identification'
+      },
+      {
+        id: 2,
+        title: 'Apply for SIN',
+        description: 'Social Insurance Number from Service Canada.',
+        status: 'not-started',
+        category: 'Identification'
+      },
+      {
+        id: 3,
+        title: 'Open a Bank Account',
+        description: 'Set up banking at major Canadian banks.',
+        status: 'not-started',
+        category: 'Banking'
+      },
+      {
+        id: 4,
+        title: 'Get Yukon Driver\'s License',
+        description: 'Apply at Motor Vehicles. Exchange or take tests.',
+        status: 'not-started',
+        category: 'Transportation'
+      }
+    ],
+    NT: [
+      {
+        id: 1,
+        title: 'Get NWT Health Care Card',
+        description: 'Apply for Northwest Territories Health Care card.',
+        status: 'not-started',
+        category: 'Identification'
+      },
+      {
+        id: 2,
+        title: 'Apply for SIN',
+        description: 'Social Insurance Number from Service Canada.',
+        status: 'not-started',
+        category: 'Identification'
+      },
+      {
+        id: 3,
+        title: 'Open a Bank Account',
+        description: 'Set up banking at major Canadian banks.',
+        status: 'not-started',
+        category: 'Banking'
+      },
+      {
+        id: 4,
+        title: 'Get NWT Driver\'s License',
+        description: 'Apply at Motor Vehicles. Exchange or take tests.',
+        status: 'not-started',
+        category: 'Transportation'
+      }
+    ],
+    NU: [
+      {
+        id: 1,
+        title: 'Get Nunavut Health Care Card',
+        description: 'Apply for Nunavut Health Care card.',
+        status: 'not-started',
+        category: 'Identification'
+      },
+      {
+        id: 2,
+        title: 'Apply for SIN',
+        description: 'Social Insurance Number from Service Canada.',
+        status: 'not-started',
+        category: 'Identification'
+      },
+      {
+        id: 3,
+        title: 'Open a Bank Account',
+        description: 'Set up banking at major Canadian banks.',
+        status: 'not-started',
+        category: 'Banking'
+      },
+      {
+        id: 4,
+        title: 'Get Nunavut Driver\'s License',
+        description: 'Apply at Motor Vehicles. Exchange or take tests.',
+        status: 'not-started',
+        category: 'Transportation'
+      }
+    ]
   };
+
+  // Return province-specific tasks or default to BC tasks
+  return provinceTasks[province] || provinceTasks.BC;
+};
   
   // CALL THE FUNCTION TO GET TASKS - REPLACE OLD const quickTasks = [...] WITH THIS
   const quickTasks = getQuickTasks();

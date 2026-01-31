@@ -310,7 +310,288 @@ function CommunityResources({ userProfile, onNavigate }) {
         phone: '1-877-767-8773',
         website: 'https://www.quebec.ca/en/employment/employment-assistance-and-support-measures',
         address: 'Multiple Service Canada offices in Quebec'
-      }
+      },
+      // Saskatchewan Resources
+{
+  id: 27,
+  category: 'Settlement Services',
+  name: 'Saskatchewan Intercultural Association',
+  province: 'SK',
+  description: 'Settlement services for newcomers in Regina and area.',
+  services: ['Settlement Support', 'Language Programs', 'Employment Services', 'Community Programs'],
+  phone: '306-757-8813',
+  website: 'https://www.sianewcomers.sk.ca/',
+  address: '2445 13th Avenue, Regina, SK'
+},
+{
+  id: 28,
+  category: 'Settlement Services',
+  name: 'Saskatoon Open Door Society',
+  province: 'SK',
+  description: 'Immigrant and refugee services in Saskatoon.',
+  services: ['Newcomer Services', 'Language Training', 'Job Search', 'Youth Programs'],
+  phone: '306-653-4464',
+  website: 'https://www.sods.sk.ca/',
+  address: '416 - 20th Street West, Saskatoon, SK'
+},
+{
+  id: 29,
+  category: 'Healthcare',
+  name: 'HealthLine Saskatchewan',
+  province: 'SK',
+  description: '24/7 health advice from nurses.',
+  services: ['Health Advice', 'Symptom Assessment', 'Find Services'],
+  phone: '811',
+  website: 'https://www.healthlineonline.ca/',
+  address: 'Phone and online services'
+},
+
+// Manitoba Resources
+{
+  id: 30,
+  category: 'Settlement Services',
+  name: 'Immigrant Centre Manitoba',
+  province: 'MB',
+  description: 'Settlement and integration services in Winnipeg.',
+  services: ['Settlement Support', 'Language Classes', 'Employment Help', 'Family Programs'],
+  phone: '204-943-9158',
+  website: 'https://icmanitoba.com/',
+  address: '200 - 100 Adelaide Street, Winnipeg, MB'
+},
+{
+  id: 31,
+  category: 'Settlement Services',
+  name: 'Manitoba Start',
+  province: 'MB',
+  description: 'Employment and training programs for newcomers.',
+  services: ['Job Search', 'Skills Training', 'Career Counselling', 'Language Training'],
+  phone: '204-925-2139',
+  website: 'https://manitobastart.com/',
+  address: '294 Portage Avenue, Winnipeg, MB'
+},
+{
+  id: 32,
+  category: 'Healthcare',
+  name: 'Health Links – Info Santé',
+  province: 'MB',
+  description: '24/7 health information from nurses.',
+  services: ['Health Advice', 'Find Services', 'Prescription Information'],
+  phone: '204-788-8200 or 1-888-315-9257',
+  website: 'https://www.gov.mb.ca/health/familydoctorfinder/',
+  address: 'Phone and online services'
+},
+
+// New Brunswick Resources
+{
+  id: 33,
+  category: 'Settlement Services',
+  name: 'Multicultural Association of Fredericton',
+  province: 'NB',
+  description: 'Settlement and integration services in Fredericton.',
+  services: ['Newcomer Services', 'Language Programs', 'Employment Support', 'Community Programs'],
+  phone: '506-457-3036',
+  website: 'https://www.mcaf.nb.ca/',
+  address: '123 York Street, Fredericton, NB'
+},
+{
+  id: 34,
+  category: 'Settlement Services',
+  name: 'MAGMA (Multicultural Association of the Greater Moncton Area)',
+  province: 'NB',
+  description: 'Immigrant services in Moncton area.',
+  services: ['Settlement Help', 'Language Classes', 'Job Preparation', 'Youth Services'],
+  phone: '506-858-9659',
+  website: 'https://www.magma-amgm.org/',
+  address: '59 Temple Avenue, Moncton, NB'
+},
+{
+  id: 35,
+  category: 'Healthcare',
+  name: 'Tele-Care 811',
+  province: 'NB',
+  description: '24/7 health information from nurses.',
+  services: ['Health Advice', 'Find Services', 'Medication Questions'],
+  phone: '811',
+  website: 'https://www2.gnb.ca/content/gnb/en/departments/health/Tele-Care.html',
+  address: 'Phone and online services'
+},
+
+// Nova Scotia Resources
+{
+  id: 36,
+  category: 'Settlement Services',
+  name: 'Immigrant Services Association of Nova Scotia (ISANS)',
+  province: 'NS',
+  description: 'Comprehensive settlement services across Nova Scotia.',
+  services: ['Settlement Support', 'Language Training', 'Employment Services', 'Youth Programs'],
+  phone: '902-423-3607',
+  website: 'https://www.isans.ca/',
+  address: '2650 Agricola Street, Halifax, NS'
+},
+{
+  id: 37,
+  category: 'Settlement Services',
+  name: 'Cape Breton Association for Newcomers to Canada',
+  province: 'NS',
+  description: 'Newcomer services in Cape Breton.',
+  services: ['Settlement Help', 'Language Programs', 'Job Search', 'Community Support'],
+  phone: '902-539-5696',
+  website: 'https://www.cbacneeds.ca/',
+  address: '320 Esplanade, Sydney, NS'
+},
+{
+  id: 38,
+  category: 'Healthcare',
+  name: '811 HealthLink Nova Scotia',
+  province: 'NS',
+  description: '24/7 health information and advice.',
+  services: ['Health Advice', 'Find Services', 'Symptom Assessment'],
+  phone: '811',
+  website: 'https://811.novascotia.ca/',
+  address: 'Phone and online services'
+},
+
+// Prince Edward Island Resources
+{
+  id: 39,
+  category: 'Settlement Services',
+  name: 'PEI Association for Newcomers to Canada',
+  province: 'PE',
+  description: 'Settlement and integration services in PEI.',
+  services: ['Settlement Support', 'Language Classes', 'Employment Help', 'Community Programs'],
+  phone: '902-628-6009',
+  website: 'https://www.peianc.com/',
+  address: '49 Water Street, Charlottetown, PE'
+},
+{
+  id: 40,
+  category: 'Employment Services',
+  name: 'SkillsPEI',
+  province: 'PE',
+  description: 'Employment and training services.',
+  services: ['Job Search', 'Skills Training', 'Career Counselling', 'Workshops'],
+  phone: '902-368-6347',
+  website: 'https://www.princeedwardisland.ca/en/topic/skillspei',
+  address: 'Multiple locations in PEI'
+},
+{
+  id: 41,
+  category: 'Healthcare',
+  name: 'HealthPEI',
+  province: 'PE',
+  description: 'Health information and services.',
+  services: ['Health Advice', 'Find Services', 'Appointments'],
+  phone: '1-888-236-2108',
+  website: 'https://www.princeedwardisland.ca/en/topic/health-pei',
+  address: 'Multiple health centers'
+},
+
+// Newfoundland and Labrador Resources
+{
+  id: 42,
+  category: 'Settlement Services',
+  name: 'Association for New Canadians (ANC)',
+  province: 'NL',
+  description: 'Settlement services for newcomers in Newfoundland and Labrador.',
+  services: ['Settlement Support', 'Language Programs', 'Employment Services', 'Youth Programs'],
+  phone: '709-722-9680',
+  website: 'https://www.ancnl.ca/',
+  address: '107 - 109 Duckworth Street, St. John\'s, NL'
+},
+{
+  id: 43,
+  category: 'Employment Services',
+  name: 'NL Employment Services',
+  province: 'NL',
+  description: 'Job search and career support.',
+  services: ['Job Search', 'Resume Help', 'Career Counselling', 'Training Programs'],
+  phone: '1-877-729-7444',
+  website: 'https://www.gov.nl.ca/aesl/employment/',
+  address: 'Multiple locations in NL'
+},
+{
+  id: 44,
+  category: 'Healthcare',
+  name: 'HealthLine NL',
+  province: 'NL',
+  description: '24/7 health advice from nurses.',
+  services: ['Health Advice', 'Find Services', 'Medication Questions'],
+  phone: '811',
+  website: 'https://www.health.gov.nl.ca/health/',
+  address: 'Phone and online services'
+},
+
+// Yukon Resources
+{
+  id: 45,
+  category: 'Settlement Services',
+  name: 'Yukon Association for Newcomers',
+  province: 'YT',
+  description: 'Settlement and integration support in Yukon.',
+  services: ['Settlement Support', 'Language Classes', 'Job Search', 'Community Programs'],
+  phone: '867-668-6133',
+  website: 'https://www.immigrateyukon.com/',
+  address: '203A - 307 Jarvis Street, Whitehorse, YT'
+},
+{
+  id: 46,
+  category: 'Employment Services',
+  name: 'Yukon Employment Services',
+  province: 'YT',
+  description: 'Employment and training programs.',
+  services: ['Job Search', 'Career Planning', 'Skills Training', 'Job Matching'],
+  phone: '867-667-5944',
+  website: 'https://yukon.ca/en/doing-business/employer-programs-and-services',
+  address: 'Whitehorse and communities'
+},
+
+// Northwest Territories Resources
+{
+  id: 47,
+  category: 'Settlement Services',
+  name: 'NWT Nominee Program',
+  province: 'NT',
+  description: 'Immigration and settlement information for NWT.',
+  services: ['Settlement Info', 'Immigration Support', 'Community Resources'],
+  phone: '867-767-9062',
+  website: 'https://www.iti.gov.nt.ca/en/services/nominee-program',
+  address: 'Yellowknife and regional offices'
+},
+{
+  id: 48,
+  category: 'Employment Services',
+  name: 'NWT Employment Services',
+  province: 'NT',
+  description: 'Job search and employment support.',
+  services: ['Job Search', 'Career Counselling', 'Training Programs', 'Job Placement'],
+  phone: '867-767-9190',
+  website: 'https://www.ece.gov.nt.ca/en/services/employment',
+  address: 'Multiple locations in NWT'
+},
+
+// Nunavut Resources
+{
+  id: 49,
+  category: 'Settlement Services',
+  name: 'Nunavut Immigration',
+  province: 'NU',
+  description: 'Immigration and settlement information for Nunavut.',
+  services: ['Settlement Info', 'Immigration Support', 'Community Resources'],
+  phone: '867-975-7800',
+  website: 'https://www.gov.nu.ca/edt/information/immigration',
+  address: 'Iqaluit and regional offices'
+},
+{
+  id: 50,
+  category: 'Employment Services',
+  name: 'Nunavut Employment Services',
+  province: 'NU',
+  description: 'Job search and career support.',
+  services: ['Job Search', 'Career Planning', 'Skills Training', 'Employment Programs'],
+  phone: '867-975-5400',
+  website: 'https://www.gov.nu.ca/family-services/information/career-development',
+  address: 'Multiple communities in Nunavut'
+}
     ];
 
     // Filter by province
