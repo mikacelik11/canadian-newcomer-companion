@@ -18,4 +18,4 @@ process.on('beforeExit', async () => {
   await prisma.$disconnect();
 });
 
-module.exports = { prisma, testConnection };
+module.exports = { prisma, testConnection }; //
