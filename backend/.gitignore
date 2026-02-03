@@ -2,4 +2,4 @@
 /src/generated/prisma
 .env
 .env.local
-.env.production
+.env.production 
