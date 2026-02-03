@@ -1,12 +1,17 @@
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const { testConnection } = require('./config/db'); // ADD THIS LINE
 
 // Load environment variables
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+
+// Test database connection - ADD THIS
+testConnection();
+
 
 // Middleware
 app.use(cors());

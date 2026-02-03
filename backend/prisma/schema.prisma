@@ -1,0 +1,56 @@
+// This is your Prisma schema file
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// User model
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  name      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  profile      UserProfile?
+  taskProgress TaskProgress[]
+}
+
+// User Profile model
+model UserProfile {
+  id        Int      @id @default(autoincrement())
+  userId    Int      @unique
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  language  String   @default("English")
+  purpose   String   // immigration, temporary, travel
+  province  String   // BC, ON, AB, etc.
+  location  String
+  
+  onboardingComplete Boolean @default(false)
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// Task Progress model
+model TaskProgress {
+  id          Int      @id @default(autoincrement())
+  userId      Int
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  taskId      Int      // 1-11 (the task ID from frontend)
+  completed   Boolean  @default(false)
+  completedAt DateTime?
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@unique([userId, taskId])
+}
