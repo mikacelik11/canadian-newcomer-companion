@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Navigation from './Navigation';
+import Navigation from './Navigation'; // help page
 
 function Help({ onNavigate }) {
   const [searchQuery, setSearchQuery] = useState('');
