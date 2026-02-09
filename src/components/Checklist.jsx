@@ -1189,28 +1189,41 @@ const getProvinceTasks = () => {
     }
   ];
 
-  const [tasks, setTasks] = useState(() => {
-    // Load saved progress on mount
-    const savedProgress = getTaskProgress();
-    
-    if (savedProgress) {
-      // Merge saved completion state with task data
-      return allTasks.map(task => {
-        const saved = savedProgress.find(p => p.id === task.id);
-        return saved ? { ...task, completed: saved.completed } : task;
-      });
-    }
-    
-    return allTasks;
-  });
+  const [tasks, setTasks] = useState(allTasks);
+const [tasksLoaded, setTasksLoaded] = useState(false);
+
+  // Load tasks from backend/localStorage on mount
+  useEffect(() => {
+    const loadTasks = async () => {
+      const savedProgress = await getTaskProgress();
+      
+      if (savedProgress) {
+        // Merge saved completion state with task data
+        const mergedTasks = allTasks.map(task => {
+          const saved = savedProgress.find(p => p.taskId === task.id || p.id === task.id);
+          return saved ? { ...task, completed: saved.completed } : task;
+        });
+        setTasks(mergedTasks);
+      }
+      
+      setTasksLoaded(true);
+    };
+
+    loadTasks();
+  }, []);
   
   const [expandedTask, setExpandedTask] = useState(null);
   const [filterCategory, setFilterCategory] = useState('all');
 
-  // Save progress whenever tasks change
   useEffect(() => {
-    saveTaskProgress(tasks);
-  }, [tasks]);
+    const saveTasks = async () => {
+      if (tasksLoaded) { // Only save after initial load
+        await saveTaskProgress(tasks);
+      }
+    };
+    
+    saveTasks();
+  }, [tasks, tasksLoaded]);
 
   const categories = ['all', 'Identification', 'Banking', 'Healthcare', 'Transportation', 'Housing', 'Communication', 'Community', 'Cultural Integration'];
 

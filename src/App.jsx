@@ -35,26 +35,30 @@ function App() {
     const loadData = async () => {
       // Simulate loading time for smooth experience
       await new Promise(resolve => setTimeout(resolve, 800));
-      
-      const savedProfile = getUserProfile();
+    
+      const savedProfile = await getUserProfile(); // Now async
       const onboardingDone = isOnboardingComplete();
 
       if (savedProfile && onboardingDone) {
         setUserProfile(savedProfile);
         setCurrentStep('dashboard');
       }
-      
+    
       setIsLoading(false);
     };
 
     loadData();
   }, []);
 
-  // Save profile whenever it changes
+// Save profile whenever it changes
   useEffect(() => {
-    if (userProfile.language && userProfile.province && userProfile.location) {
-      saveUserProfile(userProfile);
-    }
+    const saveProfile = async () => {
+      if (userProfile.language && userProfile.province && userProfile.location) {
+        await saveUserProfile(userProfile); // Now async
+      }
+    };
+  
+    saveProfile();
   }, [userProfile]);
 
   // Handle page transitions

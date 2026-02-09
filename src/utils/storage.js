@@ -1,88 +1,114 @@
-// LocalStorage utility functions
+import { userAPI } from '../services/api';
 
-const STORAGE_KEYS = {
-    USER_PROFILE: 'canadianNewcomer_userProfile',
-    TASK_PROGRESS: 'canadianNewcomer_taskProgress',
-    ONBOARDING_COMPLETE: 'canadianNewcomer_onboardingComplete'
-  };
-  
-  // User Profile Functions
-  export const saveUserProfile = (profile) => {
+// Check if user is authenticated
+const isAuthenticated = () => {
+  return localStorage.getItem('token') !== null;
+};
+
+// ==================== USER PROFILE ====================
+
+export const saveUserProfile = async (profile) => {
+  if (isAuthenticated()) {
     try {
-      localStorage.setItem(STORAGE_KEYS.USER_PROFILE, JSON.stringify(profile));
-      return true;
+      // Save to backend
+      const response = await userAPI.saveProfile({
+        language: profile.language,
+        purpose: profile.purpose,
+        province: profile.province,
+        location: profile.location,
+        onboardingComplete: true
+      });
+      return response;
     } catch (error) {
-      console.error('Error saving user profile:', error);
-      return false;
+      console.error('Error saving profile to backend:', error);
+      // Fallback to localStorage if backend fails
+      localStorage.setItem('canadianNewcomer_userProfile', JSON.stringify(profile));
     }
-  };
-  
-  export const getUserProfile = () => {
+  } else {
+    // Guest user - save to localStorage
+    localStorage.setItem('canadianNewcomer_userProfile', JSON.stringify(profile));
+  }
+};
+
+export const getUserProfile = async () => {
+  if (isAuthenticated()) {
     try {
-      const profile = localStorage.getItem(STORAGE_KEYS.USER_PROFILE);
-      return profile ? JSON.parse(profile) : null;
+      // Get from backend
+      const response = await userAPI.getProfile();
+      return response.profile;
     } catch (error) {
-      console.error('Error loading user profile:', error);
-      return null;
+      console.error('Error getting profile from backend:', error);
+      // Fallback to localStorage
+      const saved = localStorage.getItem('canadianNewcomer_userProfile');
+      return saved ? JSON.parse(saved) : null;
     }
-  };
-  
-  // Task Progress Functions
-  export const saveTaskProgress = (tasks) => {
+  } else {
+    // Guest user - get from localStorage
+    const saved = localStorage.getItem('canadianNewcomer_userProfile');
+    return saved ? JSON.parse(saved) : null;
+  }
+};
+
+// ==================== TASK PROGRESS ====================
+
+export const saveTaskProgress = async (tasks) => {
+  if (isAuthenticated()) {
     try {
-      // Only save the completion state, not all task data
-      const progressData = tasks.map(task => ({
-        id: task.id,
+      // Format tasks for backend
+      const formattedTasks = tasks.map(task => ({
+        taskId: task.id,
         completed: task.completed
       }));
-      localStorage.setItem(STORAGE_KEYS.TASK_PROGRESS, JSON.stringify(progressData));
-      return true;
+      
+      // Save to backend
+      const response = await userAPI.saveTasks(formattedTasks);
+      return response;
     } catch (error) {
-      console.error('Error saving task progress:', error);
-      return false;
+      console.error('Error saving tasks to backend:', error);
+      // Fallback to localStorage
+      localStorage.setItem('canadianNewcomer_taskProgress', JSON.stringify(tasks));
     }
-  };
-  
-  export const getTaskProgress = () => {
+  } else {
+    // Guest user - save to localStorage
+    localStorage.setItem('canadianNewcomer_taskProgress', JSON.stringify(tasks));
+  }
+};
+
+export const getTaskProgress = async () => {
+  if (isAuthenticated()) {
     try {
-      const progress = localStorage.getItem(STORAGE_KEYS.TASK_PROGRESS);
-      return progress ? JSON.parse(progress) : null;
+      // Get from backend
+      const response = await userAPI.getTasks();
+      return response.tasks;
     } catch (error) {
-      console.error('Error loading task progress:', error);
-      return null;
+      console.error('Error getting tasks from backend:', error);
+      // Fallback to localStorage
+      const saved = localStorage.getItem('canadianNewcomer_taskProgress');
+      return saved ? JSON.parse(saved) : null;
     }
-  };
-  
-  // Onboarding Status Functions
-  export const setOnboardingComplete = (isComplete) => {
-    try {
-      localStorage.setItem(STORAGE_KEYS.ONBOARDING_COMPLETE, JSON.stringify(isComplete));
-      return true;
-    } catch (error) {
-      console.error('Error saving onboarding status:', error);
-      return false;
-    }
-  };
-  
-  export const isOnboardingComplete = () => {
-    try {
-      const status = localStorage.getItem(STORAGE_KEYS.ONBOARDING_COMPLETE);
-      return status ? JSON.parse(status) : false;
-    } catch (error) {
-      console.error('Error loading onboarding status:', error);
-      return false;
-    }
-  };
-  
-  // Clear all data (for reset functionality)
-  export const clearAllData = () => {
-    try {
-      Object.values(STORAGE_KEYS).forEach(key => {
-        localStorage.removeItem(key);
-      });
-      return true;
-    } catch (error) {
-      console.error('Error clearing data:', error);
-      return false;
-    }
-  };
+  } else {
+    // Guest user - get from localStorage
+    const saved = localStorage.getItem('canadianNewcomer_taskProgress');
+    return saved ? JSON.parse(saved) : null;
+  }
+};
+
+// ==================== ONBOARDING ====================
+
+export const setOnboardingComplete = (value) => {
+  localStorage.setItem('canadianNewcomer_onboardingComplete', JSON.stringify(value));
+};
+
+export const isOnboardingComplete = () => {
+  const saved = localStorage.getItem('canadianNewcomer_onboardingComplete');
+  return saved ? JSON.parse(saved) : false;
+};
+
+// ==================== CLEAR DATA ====================
+
+export const clearAllData = () => {
+  localStorage.removeItem('canadianNewcomer_userProfile');
+  localStorage.removeItem('canadianNewcomer_taskProgress');
+  localStorage.removeItem('canadianNewcomer_onboardingComplete');
+  localStorage.removeItem('token'); // Also clear auth token
+};

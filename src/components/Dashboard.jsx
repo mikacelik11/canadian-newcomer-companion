@@ -9,11 +9,15 @@ function Dashboard({ userProfile, onNavigate }) {
   const totalCount = 11; // Total tasks in checklist
 
   useEffect(() => {
-    const taskProgress = getTaskProgress();
-    if (taskProgress) {
-      const completed = taskProgress.filter(task => task.completed).length;
-      setCompletedCount(completed);
-    }
+    const loadProgress = async () => {
+      const taskProgress = await getTaskProgress();
+      if (taskProgress) {
+        const completed = taskProgress.filter(task => task.completed).length;
+        setCompletedCount(completed);
+      }
+    };
+    
+    loadProgress();
   }, []);
   
   // GET PROVINCE-SPECIFIC TASKS - ADD THIS FUNCTION HERE
