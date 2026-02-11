@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'; // usestate and useffect import 
 import Navigation from './Navigation';
 import { clearAllData, getTaskProgress } from '../utils/storage';
 
