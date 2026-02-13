@@ -4,7 +4,7 @@ import { clearAllData, getTaskProgress } from '../utils/storage';
 
 
 function Dashboard({ userProfile, onNavigate }) {
-  const { language, purpose, province, location } = userProfile; // usestate //
+  const { language, purpose, province, location } = userProfile; // usestate // dw
   const [completedCount, setCompletedCount] = useState(0); // Keeps track of completed count
   const totalCount = 11; // Total tasks in checklist
 
