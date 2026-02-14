@@ -4,7 +4,7 @@ import { clearAllData, getTaskProgress } from '../utils/storage';
 
 
 function Dashboard({ userProfile, onNavigate }) {
-  const { language, purpose, province, location } = userProfile; // usestate // dw
+  const { language, purpose, province, location } = userProfile; // usestate
   const [completedCount, setCompletedCount] = useState(0); // Keeps track of completed count
   const totalCount = 11; // Total tasks in checklist
 
@@ -20,7 +20,7 @@ function Dashboard({ userProfile, onNavigate }) {
     loadProgress();
   }, []);
   
-  // GET PROVINCE-SPECIFIC TASKS - ADD THIS FUNCTION HERE test
+  // GET PROVINCE-SPECIFIC TASKS - ADD THIS FUNCTION HERE
   // Get province-specific tasks
 const getQuickTasks = () => {
   const provinceTasks = {
