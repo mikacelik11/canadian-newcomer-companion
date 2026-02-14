@@ -20,7 +20,7 @@ function Dashboard({ userProfile, onNavigate }) {
     loadProgress();
   }, []);
   
-  // GET PROVINCE-SPECIFIC TASKS - ADD THIS FUNCTION HERE
+  // GET PROVINCE-SPECIFIC TASKS - ADD THIS FUNCTION HERE test
   // Get province-specific tasks
 const getQuickTasks = () => {
   const provinceTasks = {
