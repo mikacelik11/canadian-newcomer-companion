@@ -328,9 +328,10 @@ If you encounter any bugs or have feature requests:
 
 ## 🌟 Key Achievements
 
+✅ **Complete details for every province in Canada** with different tasks
 ✅ **Complete onboarding workflow** with 6 interactive steps  
 ✅ **11 fully detailed tasks** with government links  
-✅ **16+ community resources** for BC region  
+✅ **community resources** for regions throughout Canada 
 ✅ **Fully responsive design** optimized for mobile  
 ✅ **LocalStorage persistence** for offline functionality  
 ✅ **Indigenous land acknowledgement** with educational content  
