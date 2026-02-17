@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import Navigation from './Navigation';
 
+import { useAuth } from '../context/AuthContext';
+
+
 function Settings({ userProfile, onUpdateProfile, onNavigate }) {
+  const { isAuthenticated, user } = useAuth();
   const [isEditingLanguage, setIsEditingLanguage] = useState(false);
   const [isEditingPurpose, setIsEditingPurpose] = useState(false);
   const [isEditingRegion, setIsEditingRegion] = useState(false);
@@ -101,6 +105,36 @@ function Settings({ userProfile, onUpdateProfile, onNavigate }) {
             Update your preferences and profile information
           </p>
         </header>
+
+        {/* Account Information (if logged in) */}
+{isAuthenticated && (
+  <div className="setting-card">
+    <h2 className="setting-title">Account Information</h2>
+    <div className="account-info">
+      <div className="info-row">
+        <span className="info-label">Name:</span>
+        <span className="info-value">{user?.name || 'Not set'}</span>
+      </div>
+      <div className="info-row">
+        <span className="info-label">Email:</span>
+        <span className="info-value">{user?.email}</span>
+      </div>
+      <div className="info-row">
+        <span className="info-label">Account Type:</span>
+        <span className="info-value">Registered User</span>
+      </div>
+    </div>
+  </div>
+)}
+
+{/* Guest Mode Notice */}
+{!isAuthenticated && (
+  <div className="setting-card guest-notice">
+    <h2 className="setting-title">⚠️ Guest Mode</h2>
+    <p>You're using the app as a guest. Your data is only saved locally and won't sync across devices.</p>
+    <p>Create an account to save your progress in the cloud!</p>
+  </div>
+)}
 
         {/* Language Setting */}
         <section className="setting-section">

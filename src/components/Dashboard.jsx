@@ -11,8 +11,11 @@ function Dashboard({ userProfile, onNavigate }) {
   useEffect(() => {
     const loadProgress = async () => {
       const taskProgress = await getTaskProgress();
-      if (taskProgress) {
-        const completed = taskProgress.filter(task => task.completed).length;
+      if (taskProgress && Array.isArray(taskProgress)) {
+        // Count completed tasks (handle both formats)
+        const completed = taskProgress.filter(task => {
+          return task.completed === true;
+        }).length;
         setCompletedCount(completed);
       }
     };
