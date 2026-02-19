@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import CustomHeader from './CustomHeader';
 
 function LanguageSelection({ onNext, onPrevious }) {
   const [selectedLanguage, setSelectedLanguage] = useState('');
@@ -15,15 +16,7 @@ function LanguageSelection({ onNext, onPrevious }) {
 
   return (
     <div className="language-selection-container">
-      <div className="government-header">
-        <div className="canada-flag">🍁</div>
-        <div className="government-text">
-          <span>Welcome to Canada</span>
-          <span>Bienvenue au Canada</span>
-        </div>
-        
-        <div className="canada-wordmark">Canada</div>
-      </div>
+      <CustomHeader />
 
       <div className="language-content">
         <h1 className="language-title">Choose Your Language</h1>

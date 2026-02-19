@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import Navigation from './Navigation';
+import CustomHeader from './CustomHeader';
 
 function CommunityResources({ userProfile, onNavigate }) {
   const { province, location } = userProfile;
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
+
 
   // Resources data - customized based on province
   const getResources = () => {
@@ -614,18 +616,7 @@ function CommunityResources({ userProfile, onNavigate }) {
 
   return (
     <div className="resources-container">
-      <div className="government-header">
-        <div className="canada-flag">🍁</div>
-        <div className="government-text">
-          <span>Government</span>
-          <span>Gouvernement</span>
-        </div>
-        <div className="government-text">
-          <span>of Canada</span>
-          <span>du Canada</span>
-        </div>
-        <div className="canada-wordmark">Canada</div>
-      </div>
+      <CustomHeader />
 
       <Navigation currentPage="resources" onNavigate={onNavigate} />
 

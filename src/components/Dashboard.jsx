@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'; // usestate and useffect import 
 import Navigation from './Navigation';
 import { clearAllData, getTaskProgress } from '../utils/storage';
+import CustomHeader from './CustomHeader';
 
 
 function Dashboard({ userProfile, onNavigate }) {
@@ -462,18 +463,7 @@ const getQuickTasks = () => {
 
   return (
     <div className="dashboard-container">
-      <div className="government-header">
-        <div className="canada-flag">🍁</div>
-        <div className="government-text">
-          <span>Government</span>
-          <span>Gouvernement</span>
-        </div>
-        <div className="government-text">
-          <span>of Canada</span>
-          <span>du Canada</span>
-        </div>
-        <div className="canada-wordmark">Canada</div>
-      </div>
+      <CustomHeader />
 
       <Navigation currentPage="home" onNavigate={onNavigate} />
 

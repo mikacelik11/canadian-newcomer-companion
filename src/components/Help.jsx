@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Navigation from './Navigation'; // help page
+import CustomHeader from './CustomHeader';
 
 function Help({ onNavigate }) {
   const [searchQuery, setSearchQuery] = useState('');
@@ -115,18 +116,7 @@ function Help({ onNavigate }) {
 
   return (
     <div className="help-container">
-      <div className="government-header">
-        <div className="canada-flag">🍁</div>
-        <div className="government-text">
-          <span>Government</span>
-          <span>Gouvernement</span>
-        </div>
-        <div className="government-text">
-          <span>of Canada</span>
-          <span>du Canada</span>
-        </div>
-        <div className="canada-wordmark">Canada</div>
-      </div>
+      <CustomHeader />
 
       <Navigation currentPage="help" onNavigate={onNavigate} />
 

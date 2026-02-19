@@ -1,4 +1,5 @@
-import React, { useState } from 'react';  // import 
+import React, { useState } from 'react'; 
+import CustomHeader from './CustomHeader';
 
 function PurposeOfVisit({ onNext, onPrevious }) {
   const [selectedPurpose, setSelectedPurpose] = useState('');
@@ -33,15 +34,7 @@ function PurposeOfVisit({ onNext, onPrevious }) {
 
   return (
     <div className="purpose-container">
-      <div className="government-header">
-        <div className="canada-flag">🍁</div>
-        <div className="government-text">
-          <span>Welcome to Canada</span>
-          <span>Bienvenue au Canada</span>
-        </div>
-    
-        <div className="canada-wordmark">Canada</div>
-      </div>
+      <CustomHeader />
 
       <div className="purpose-content">
         <h1 className="purpose-title">Purpose of Visit</h1>

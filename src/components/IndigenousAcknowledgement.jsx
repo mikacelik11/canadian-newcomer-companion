@@ -1,5 +1,6 @@
 import React from 'react';
 import Navigation from './Navigation';
+import CustomHeader from './CustomHeader';
 
 function IndigenousAcknowledgement({ province, location, onNext, onNavigate }) {
   // Map provinces to Indigenous territories (simplified - you can expand this)
@@ -81,18 +82,7 @@ function IndigenousAcknowledgement({ province, location, onNext, onNavigate }) {
 
   return (
     <div className="indigenous-container">
-      <div className="government-header">
-        <div className="canada-flag">🍁</div>
-        <div className="government-text">
-          <span>Government</span>
-          <span>Gouvernement</span>
-        </div>
-        <div className="government-text">
-          <span>of Canada</span>
-          <span>du Canada</span>
-        </div>
-        <div className="canada-wordmark">Canada</div>
-      </div>
+      <CustomHeader />
 
       <Navigation currentPage="land" onNavigate={onNavigate} />
 

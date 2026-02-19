@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import Login from './Login';
 import Register from './Register';
+import CustomHeader from './CustomHeader';
+import Footer from './Footer';
 
 function Welcome({ onNext }) {
   const [showLogin, setShowLogin] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
 
-  // If showing login screen
   if (showLogin) {
     return (
       <Login 
@@ -19,7 +20,6 @@ function Welcome({ onNext }) {
     );
   }
 
-  // If showing register screen
   if (showRegister) {
     return (
       <Register 
@@ -32,23 +32,12 @@ function Welcome({ onNext }) {
     );
   }
 
-  // Default welcome screen
   return (
     <div className="onboarding-container">
-      <div className="government-header">
-        <div className="canada-flag">🍁</div>
-        <div className="government-text">
-          <span>Government</span>
-          <span>Gouvernement</span>
-        </div>
-        <div className="government-text">
-          <span>of Canada</span>
-          <span>du Canada</span>
-        </div>
-        <div className="canada-wordmark">Canada</div>
-      </div>
+      <CustomHeader />
 
       <div className="onboarding-content">
+        {/* Rest of your welcome content stays the same */}
         <div className="welcome-card">
           <h1 className="welcome-title">
             Welcome to the Canadian Newcomer Companion
@@ -101,6 +90,8 @@ function Welcome({ onNext }) {
           </div>
         </div>
       </div>
+
+      <Footer />
     </div>
   );
 }

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
+import CustomHeader from './CustomHeader';
+import Footer from './Footer';
 
 function Login({ onNext, onSwitchToRegister }) {
   const [email, setEmail] = useState('');
@@ -26,18 +28,7 @@ function Login({ onNext, onSwitchToRegister }) {
 
   return (
     <div className="onboarding-container">
-      <div className="government-header">
-        <div className="canada-flag">🍁</div>
-        <div className="government-text">
-          <span>Government</span>
-          <span>Gouvernement</span>
-        </div>
-        <div className="government-text">
-          <span>of Canada</span>
-          <span>du Canada</span>
-        </div>
-        <div className="canada-wordmark">Canada</div>
-      </div>
+      <CustomHeader />
 
       <div className="onboarding-content">
         <div className="welcome-card">
@@ -100,6 +91,8 @@ function Login({ onNext, onSwitchToRegister }) {
           </form>
         </div>
       </div>
+
+      <Footer />
     </div>
   );
 }

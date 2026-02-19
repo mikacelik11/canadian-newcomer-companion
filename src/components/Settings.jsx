@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Navigation from './Navigation';
 
 import { useAuth } from '../context/AuthContext';
+import CustomHeader from './CustomHeader';
 
 
 function Settings({ userProfile, onUpdateProfile, onNavigate }) {
@@ -83,18 +84,7 @@ function Settings({ userProfile, onUpdateProfile, onNavigate }) {
 
   return (
     <div className="settings-container">
-      <div className="government-header">
-        <div className="canada-flag">🍁</div>
-        <div className="government-text">
-          <span>Government</span>
-          <span>Gouvernement</span>
-        </div>
-        <div className="government-text">
-          <span>of Canada</span>
-          <span>du Canada</span>
-        </div>
-        <div className="canada-wordmark">Canada</div>
-      </div>
+      <CustomHeader />
 
       <Navigation currentPage="settings" onNavigate={onNavigate} />
 
