@@ -27,6 +27,19 @@ A comprehensive full-stack web application designed to help newcomers settle in 
 
 ---
 
+## ⚠️ Important Disclaimer
+
+**This is an independent student project created for educational purposes. This application is NOT affiliated with, endorsed by, or connected to the Government of Canada in any way.**
+
+For official immigration and settlement information, please visit:
+- **Government of Canada:** [canada.ca](https://www.canada.ca)
+- **Immigration, Refugees and Citizenship Canada (IRCC):** [cic.gc.ca](https://www.canada.ca/en/immigration-refugees-citizenship.html)
+
+All government links and resources provided in this app direct to official Government of Canada websites.
+
+---
+
+
 ## ✨ Features
 
 ### Core Functionality
