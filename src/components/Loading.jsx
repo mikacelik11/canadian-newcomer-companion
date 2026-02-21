@@ -14,4 +14,4 @@ function Loading() {
   );
 }
 
-export default Loading; // finish
+export default Loading;
