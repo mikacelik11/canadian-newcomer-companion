@@ -31,7 +31,7 @@ model UserProfile {
   language  String   @default("English")
   purpose   String   // immigration, temporary, travel
   province  String   // BC, ON, AB, etc.
-  location  String
+  location  String?  // Make this optional with ?
   
   onboardingComplete Boolean @default(false)
   

@@ -5,6 +5,21 @@ const isAuthenticated = () => {
   return localStorage.getItem('token') !== null;
 };
 
+// Get current user ID for namespacing localStorage
+const getUserStorageKey = (baseKey) => {
+  const token = localStorage.getItem('token');
+  if (token) {
+    // Extract user ID from token (it's base64 encoded)
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      return `${baseKey}_user_${payload.userId}`;
+    } catch (e) {
+      return baseKey;
+    }
+  }
+  return `${baseKey}_guest`;
+};
+
 // ==================== USER PROFILE ====================
 
 export const saveUserProfile = async (profile) => {
@@ -18,15 +33,20 @@ export const saveUserProfile = async (profile) => {
         location: profile.location,
         onboardingComplete: true
       });
+      // Also save to localStorage as cache
+      const storageKey = getUserStorageKey('canadianNewcomer_userProfile');
+      localStorage.setItem(storageKey, JSON.stringify(profile));
       return response;
     } catch (error) {
       console.error('Error saving profile to backend:', error);
       // Fallback to localStorage if backend fails
-      localStorage.setItem('canadianNewcomer_userProfile', JSON.stringify(profile));
+      const storageKey = getUserStorageKey('canadianNewcomer_userProfile');
+      localStorage.setItem(storageKey, JSON.stringify(profile));
     }
   } else {
     // Guest user - save to localStorage
-    localStorage.setItem('canadianNewcomer_userProfile', JSON.stringify(profile));
+    const storageKey = getUserStorageKey('canadianNewcomer_userProfile');
+    localStorage.setItem(storageKey, JSON.stringify(profile));
   }
 };
 
@@ -35,16 +55,21 @@ export const getUserProfile = async () => {
     try {
       // Get from backend
       const response = await userAPI.getProfile();
+      // Cache in localStorage
+      const storageKey = getUserStorageKey('canadianNewcomer_userProfile');
+      localStorage.setItem(storageKey, JSON.stringify(response.profile));
       return response.profile;
     } catch (error) {
       console.error('Error getting profile from backend:', error);
-      // Fallback to localStorage
-      const saved = localStorage.getItem('canadianNewcomer_userProfile');
+      // Fallback to localStorage cache
+      const storageKey = getUserStorageKey('canadianNewcomer_userProfile');
+      const saved = localStorage.getItem(storageKey);
       return saved ? JSON.parse(saved) : null;
     }
   } else {
     // Guest user - get from localStorage
-    const saved = localStorage.getItem('canadianNewcomer_userProfile');
+    const storageKey = getUserStorageKey('canadianNewcomer_userProfile');
+    const saved = localStorage.getItem(storageKey);
     return saved ? JSON.parse(saved) : null;
   }
 };
@@ -62,15 +87,20 @@ export const saveTaskProgress = async (tasks) => {
       
       // Save to backend
       const response = await userAPI.saveTasks(formattedTasks);
+      // Also cache in localStorage
+      const storageKey = getUserStorageKey('canadianNewcomer_taskProgress');
+      localStorage.setItem(storageKey, JSON.stringify(tasks));
       return response;
     } catch (error) {
       console.error('Error saving tasks to backend:', error);
       // Fallback to localStorage
-      localStorage.setItem('canadianNewcomer_taskProgress', JSON.stringify(tasks));
+      const storageKey = getUserStorageKey('canadianNewcomer_taskProgress');
+      localStorage.setItem(storageKey, JSON.stringify(tasks));
     }
   } else {
     // Guest user - save to localStorage
-    localStorage.setItem('canadianNewcomer_taskProgress', JSON.stringify(tasks));
+    const storageKey = getUserStorageKey('canadianNewcomer_taskProgress');
+    localStorage.setItem(storageKey, JSON.stringify(tasks));
   }
 };
 
@@ -79,16 +109,21 @@ export const getTaskProgress = async () => {
     try {
       // Get from backend
       const response = await userAPI.getTasks();
+      // Cache in localStorage
+      const storageKey = getUserStorageKey('canadianNewcomer_taskProgress');
+      localStorage.setItem(storageKey, JSON.stringify(response.tasks));
       return response.tasks;
     } catch (error) {
       console.error('Error getting tasks from backend:', error);
-      // Fallback to localStorage
-      const saved = localStorage.getItem('canadianNewcomer_taskProgress');
+      // Fallback to localStorage cache
+      const storageKey = getUserStorageKey('canadianNewcomer_taskProgress');
+      const saved = localStorage.getItem(storageKey);
       return saved ? JSON.parse(saved) : null;
     }
   } else {
     // Guest user - get from localStorage
-    const saved = localStorage.getItem('canadianNewcomer_taskProgress');
+    const storageKey = getUserStorageKey('canadianNewcomer_taskProgress');
+    const saved = localStorage.getItem(storageKey);
     return saved ? JSON.parse(saved) : null;
   }
 };
@@ -96,19 +131,25 @@ export const getTaskProgress = async () => {
 // ==================== ONBOARDING ====================
 
 export const setOnboardingComplete = (value) => {
-  localStorage.setItem('canadianNewcomer_onboardingComplete', JSON.stringify(value));
+  const storageKey = getUserStorageKey('canadianNewcomer_onboardingComplete');
+  localStorage.setItem(storageKey, JSON.stringify(value));
 };
 
 export const isOnboardingComplete = () => {
-  const saved = localStorage.getItem('canadianNewcomer_onboardingComplete');
+  const storageKey = getUserStorageKey('canadianNewcomer_onboardingComplete');
+  const saved = localStorage.getItem(storageKey);
   return saved ? JSON.parse(saved) : false;
 };
 
 // ==================== CLEAR DATA ====================
 
 export const clearAllData = () => {
-  localStorage.removeItem('canadianNewcomer_userProfile');
-  localStorage.removeItem('canadianNewcomer_taskProgress');
-  localStorage.removeItem('canadianNewcomer_onboardingComplete');
+  // Clear all possible storage keys
+  const keys = Object.keys(localStorage);
+  keys.forEach(key => {
+    if (key.startsWith('canadianNewcomer_')) {
+      localStorage.removeItem(key);
+    }
+  });
   localStorage.removeItem('token'); // Also clear auth token
 };

@@ -94,21 +94,16 @@ function App() {
   };
 
   const handleRegionNext = (province) => {
-    setUserProfile(prev => ({ ...prev, province }));
-    transitionToStep('regionDetail');
+    setUserProfile(prev => ({ 
+      ...prev, 
+      province,
+      location: province // Set location same as province
+    }));
+    transitionToStep('indigenous');
   };
 
   const handleRegionPrevious = () => {
     transitionToStep('purpose');
-  };
-
-  const handleRegionDetailNext = (location) => {
-    setUserProfile(prev => ({ ...prev, location }));
-    transitionToStep('indigenous');
-  };
-
-  const handleRegionDetailPrevious = () => {
-    transitionToStep('region');
   };
 
   const handleIndigenousNext = () => {
@@ -172,13 +167,7 @@ function App() {
           />
         )}
 
-        {currentStep === 'regionDetail' && (
-          <RegionDetail
-            province={userProfile.province}
-            onNext={handleRegionDetailNext}
-            onPrevious={handleRegionDetailPrevious}
-          />
-        )}
+    
 
         {currentStep === 'indigenous' && (
           <IndigenousAcknowledgement

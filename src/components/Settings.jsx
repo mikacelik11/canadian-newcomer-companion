@@ -237,77 +237,65 @@ function Settings({ userProfile, onUpdateProfile, onNavigate }) {
         </section>
 
         {/* Region Setting */}
-        <section className="setting-section">
-          <div className="setting-card">
-            <div className="setting-header">
-              <div className="setting-icon">📍</div>
-              <div className="setting-info">
-                <h2 className="setting-title">Region</h2>
-                <p className="setting-description">
-                  Update your province and location
-                </p>
-              </div>
-            </div>
+        
+<div className="setting-card">
+  <h2 className="setting-title">Region</h2>
+  
+  {!isEditingRegion ? (
+    <div className="setting-display">
+      <p className="setting-value">{userProfile.province}</p>
+      <button 
+        className="btn btn-secondary"
+        onClick={() => setIsEditingRegion(true)}
+      >
+        Change
+      </button>
+    </div>
+  ) : (
+    <div className="setting-edit">
+      <div className="form-group">
+        <label htmlFor="province">Province/Territory</label>
+        <select
+          id="province"
+          className="form-select"
+          value={tempProvince}
+          onChange={(e) => setTempProvince(e.target.value)}
+        >
+          <option value="">Select Province</option>
+          <option value="BC">British Columbia</option>
+          <option value="AB">Alberta</option>
+          <option value="SK">Saskatchewan</option>
+          <option value="MB">Manitoba</option>
+          <option value="ON">Ontario</option>
+          <option value="QC">Quebec</option>
+          <option value="NB">New Brunswick</option>
+          <option value="NS">Nova Scotia</option>
+          <option value="PE">Prince Edward Island</option>
+          <option value="NL">Newfoundland and Labrador</option>
+          <option value="YT">Yukon</option>
+          <option value="NT">Northwest Territories</option>
+          <option value="NU">Nunavut</option>
+        </select>
+      </div>
 
-            {!isEditingRegion ? (
-              <div className="setting-display">
-                <div className="setting-value">
-                  {userProfile.location}, {getProvinceName(userProfile.province)}
-                </div>
-                <button 
-                  className="btn btn-secondary"
-                  onClick={() => setIsEditingRegion(true)}
-                >
-                  Change Region
-                </button>
-              </div>
-            ) : (
-              <div className="setting-edit">
-                <div className="region-form">
-                  <div className="form-group">
-                    <label htmlFor="province">Province/Territory</label>
-                    <select
-                      id="province"
-                      value={tempProvince}
-                      onChange={(e) => setTempProvince(e.target.value)}
-                      className="form-select"
-                    >
-                      {provinces.map(prov => (
-                        <option key={prov.id} value={prov.id}>
-                          {prov.name}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-
-                  <div className="form-group">
-                    <label htmlFor="location">City or Location</label>
-                    <input
-                      id="location"
-                      type="text"
-                      value={tempLocation}
-                      onChange={(e) => setTempLocation(e.target.value)}
-                      className="form-input"
-                      placeholder="e.g., University of Victoria"
-                    />
-                  </div>
-                </div>
-                <div className="setting-actions">
-                  <button className="btn btn-secondary" onClick={handleCancelRegion}>
-                    Cancel
-                  </button>
-                  <button 
-                    className="btn btn-primary" 
-                    onClick={handleSaveRegion}
-                    disabled={!tempLocation.trim()}
-                  >
-                    Save Changes
-                  </button>
-                </div>
-              </div>
-            )}
-          </div>
-        </section>
+      <div className="setting-actions">
+        <button 
+          className="btn btn-secondary"
+          onClick={handleCancelRegion}
+        >
+          Cancel
+        </button>
+        <button 
+          className="btn btn-primary"
+          onClick={handleSaveRegion}
+        >
+          Save
+        </button>
+      </div>
+    </div>
+  )}
+</div>
+      
 
         {/* Accessibility Options */}
         <section className="setting-section">
