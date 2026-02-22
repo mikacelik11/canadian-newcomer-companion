@@ -7,6 +7,7 @@ import CustomHeader from './CustomHeader';
 
 function Settings({ userProfile, onUpdateProfile, onNavigate }) {
   const { isAuthenticated, user } = useAuth();
+  // usestates
   const [isEditingLanguage, setIsEditingLanguage] = useState(false);
   const [isEditingPurpose, setIsEditingPurpose] = useState(false);
   const [isEditingRegion, setIsEditingRegion] = useState(false);
